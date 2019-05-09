@@ -1,0 +1,38 @@
+package lrg.dude.duplication;
+
+/**
+ * Created by IntelliJ IDEA.
+ * User: Richard
+ * Date: 13.05.2004
+ * Time: 23:21:23
+ * To change this template use File | Settings | File Templates.
+ */
+public class Parameters {
+    private int minLength;
+    private int maxLineBias;
+    private int minExactChunk;
+    private boolean considerComments;
+
+    public Parameters(int minLength, int maxLineBias, int minExactChunk, boolean considerComments) {
+        this.minLength = minLength;
+        this.maxLineBias = maxLineBias;
+        this.minExactChunk = minExactChunk;
+        this.considerComments = considerComments;
+    }
+
+    public int getMinLength() {
+        return minLength;
+    }
+
+    public int getMaxLineBias() {
+        return maxLineBias;
+    }
+
+    public int getMinExactChunk() {
+        return minExactChunk;
+    }
+
+    public boolean isConsiderComments() {
+        return considerComments;
+    }
+}

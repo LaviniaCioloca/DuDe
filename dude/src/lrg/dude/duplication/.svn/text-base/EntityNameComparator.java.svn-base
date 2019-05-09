@@ -1,0 +1,18 @@
+package lrg.dude.duplication;
+
+import java.util.Comparator;
+
+/**
+ * Created by IntelliJ IDEA.
+ * User: Richard
+ * Date: 23.03.2004
+ * Time: 23:43:47
+ * To change this template use Options | File Templates.
+ */
+public class EntityNameComparator implements Comparator {
+    public int compare(Object o1, Object o2) {
+        String entityName1 = ((Duplication) o1).getReferenceCode().getEntityName();
+        String entityName2 = ((Duplication) o2).getReferenceCode().getEntityName();
+        return entityName1.compareTo(entityName2);
+    }
+}

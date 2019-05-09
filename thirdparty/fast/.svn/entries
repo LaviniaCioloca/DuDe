@@ -1,0 +1,37 @@
+10
+
+dir
+149
+https://ceres.cs.upt.ro/research/iPlasma/thirdparty/fast
+https://ceres.cs.upt.ro/research
+
+
+
+2009-07-15T10:26:05.864724Z
+82
+ioana
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+4b4c08cf-2f0e-4f9c-85ef-31197dd92d33
+
+dll
+dir
+
+include
+dir
+
+slib
+dir
+

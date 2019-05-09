@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/research/!svn/ver/82/iPlasma/thirdparty/fast/slib
+END
+libsgb.lib
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/research/!svn/ver/82/iPlasma/thirdparty/fast/slib/libsgb.lib
+END
+libcql.lib
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/research/!svn/ver/82/iPlasma/thirdparty/fast/slib/libcql.lib
+END
+libvtpkit.lib
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/research/!svn/ver/82/iPlasma/thirdparty/fast/slib/libvtpkit.lib
+END
+libaudit_c.lib
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/research/!svn/ver/82/iPlasma/thirdparty/fast/slib/libaudit_c.lib
+END
+libenv_c.lib
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/research/!svn/ver/82/iPlasma/thirdparty/fast/slib/libenv_c.lib
+END
+libregexp.lib
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/research/!svn/ver/82/iPlasma/thirdparty/fast/slib/libregexp.lib
+END
+libctogui.lib
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/research/!svn/ver/82/iPlasma/thirdparty/fast/slib/libctogui.lib
+END
+libquery.lib
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/research/!svn/ver/82/iPlasma/thirdparty/fast/slib/libquery.lib
+END
+libaudit.lib
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/research/!svn/ver/82/iPlasma/thirdparty/fast/slib/libaudit.lib
+END
+libctokernel.lib
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/research/!svn/ver/82/iPlasma/thirdparty/fast/slib/libctokernel.lib
+END
+libctodbm.lib
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/research/!svn/ver/82/iPlasma/thirdparty/fast/slib/libctodbm.lib
+END

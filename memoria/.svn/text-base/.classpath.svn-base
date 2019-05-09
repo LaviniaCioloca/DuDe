@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="lrg/memoria/importer/recoder/XJavaModelLoader.java" kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/thirdparty/clusters/cloudgarden.jar"/>
+	<classpathentry kind="lib" path="/thirdparty/clusters/clusters.jar"/>
+	<classpathentry kind="lib" path="/thirdparty/clusters/jgraph.jar"/>
+	<classpathentry kind="lib" path="/thirdparty/clusters/jgrapht-jdk1.5.jar"/>
+	<classpathentry kind="lib" path="/thirdparty/clusters/junit.jar"/>
+	<classpathentry kind="lib" path="/thirdparty/clusters/svnant.jar"/>
+	<classpathentry kind="lib" path="/thirdparty/clusters/svnClientAdapter.jar"/>
+	<classpathentry kind="lib" path="/thirdparty/clusters/TGGraphLayout.jar"/>
+	<classpathentry kind="lib" path="/thirdparty/recoder/recoder.jar" sourcepath="C:/Users/Adi/Desktop/recoder-0.86"/>
+	<classpathentry kind="lib" path="/thirdparty/cvslib/cvslib.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/common"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

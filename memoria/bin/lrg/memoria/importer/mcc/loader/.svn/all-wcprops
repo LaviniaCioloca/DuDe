@@ -1,0 +1,149 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader
+END
+Tp2tVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/Tp2tVisitor.java
+END
+CallVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/CallVisitor.java
+END
+DefaultCallVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/DefaultCallVisitor.java
+END
+DefaultVisitorRoot.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/DefaultVisitorRoot.java
+END
+DefaultTp2tVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/DefaultTp2tVisitor.java
+END
+DefaultChainVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/DefaultChainVisitor.java
+END
+ChainVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/ChainVisitor.java
+END
+BodyVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/BodyVisitor.java
+END
+DefaultBodyVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/DefaultBodyVisitor.java
+END
+AccessVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/AccessVisitor.java
+END
+DefaultPackageVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/DefaultPackageVisitor.java
+END
+DefaultAccessVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/DefaultAccessVisitor.java
+END
+PackageVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/PackageVisitor.java
+END
+DefaultInheritanceVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/DefaultInheritanceVisitor.java
+END
+InheritanceVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/InheritanceVisitor.java
+END
+FunctionVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/FunctionVisitor.java
+END
+DefaultFunctionVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/DefaultFunctionVisitor.java
+END
+TypeVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/TypeVisitor.java
+END
+DefaultNamespaceVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/DefaultNamespaceVisitor.java
+END
+DefaultTypeVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/DefaultTypeVisitor.java
+END
+Loader.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/Loader.java
+END
+NamespaceVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/NamespaceVisitor.java
+END
+VariableVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/VariableVisitor.java
+END
+DefaultVariableVisitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/importer/mcc/loader/DefaultVariableVisitor.java
+END

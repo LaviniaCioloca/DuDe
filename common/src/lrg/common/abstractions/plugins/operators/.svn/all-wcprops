@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/research/!svn/ver/68/iPlasma/common/src/lrg/common/abstractions/plugins/operators
+END
+FilteringOperator.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/research/!svn/ver/68/iPlasma/common/src/lrg/common/abstractions/plugins/operators/FilteringOperator.java
+END
+FilteringOperatorWithThresholds.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/research/!svn/ver/68/iPlasma/common/src/lrg/common/abstractions/plugins/operators/FilteringOperatorWithThresholds.java
+END
+AggregationOperator.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/research/!svn/ver/68/iPlasma/common/src/lrg/common/abstractions/plugins/operators/AggregationOperator.java
+END

@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/research/!svn/ver/114/iPlasma/dude/src/org/ardverk/collection
+END
+ShortKeyAnalyzer.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/research/!svn/ver/72/iPlasma/dude/src/org/ardverk/collection/ShortKeyAnalyzer.java
+END
+LongKeyAnalyzer.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/research/!svn/ver/72/iPlasma/dude/src/org/ardverk/collection/LongKeyAnalyzer.java
+END
+IntegerKeyAnalyzer.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/research/!svn/ver/72/iPlasma/dude/src/org/ardverk/collection/IntegerKeyAnalyzer.java
+END
+BigIntegerKeyAnalyzer.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/research/!svn/ver/72/iPlasma/dude/src/org/ardverk/collection/BigIntegerKeyAnalyzer.java
+END
+KeyAnalyzer.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/research/!svn/ver/72/iPlasma/dude/src/org/ardverk/collection/KeyAnalyzer.java
+END
+AbstractKeyAnalyzer.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/research/!svn/ver/72/iPlasma/dude/src/org/ardverk/collection/AbstractKeyAnalyzer.java
+END
+ByteKeyAnalyzer.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/research/!svn/ver/72/iPlasma/dude/src/org/ardverk/collection/ByteKeyAnalyzer.java
+END
+AdaptedPatriciaTrie.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/research/!svn/ver/114/iPlasma/dude/src/org/ardverk/collection/AdaptedPatriciaTrie.java
+END
+CharacterKeyAnalyzer.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/research/!svn/ver/72/iPlasma/dude/src/org/ardverk/collection/CharacterKeyAnalyzer.java
+END
+AbstractTrie.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/research/!svn/ver/72/iPlasma/dude/src/org/ardverk/collection/AbstractTrie.java
+END
+PatriciaTrie.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/research/!svn/ver/72/iPlasma/dude/src/org/ardverk/collection/PatriciaTrie.java
+END
+Trie.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/research/!svn/ver/72/iPlasma/dude/src/org/ardverk/collection/Trie.java
+END
+Tries.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/research/!svn/ver/72/iPlasma/dude/src/org/ardverk/collection/Tries.java
+END
+SortedPatriciaTrie.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/research/!svn/ver/72/iPlasma/dude/src/org/ardverk/collection/SortedPatriciaTrie.java
+END
+SortedTrie.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/research/!svn/ver/72/iPlasma/dude/src/org/ardverk/collection/SortedTrie.java
+END
+Cursor.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/research/!svn/ver/72/iPlasma/dude/src/org/ardverk/collection/Cursor.java
+END
+ByteArrayKeyAnalyzer.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/research/!svn/ver/72/iPlasma/dude/src/org/ardverk/collection/ByteArrayKeyAnalyzer.java
+END
+StringKeyAnalyzer.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/research/!svn/ver/72/iPlasma/dude/src/org/ardverk/collection/StringKeyAnalyzer.java
+END

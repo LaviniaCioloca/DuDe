@@ -1,0 +1,43 @@
+package lrg.dude.duplication;
+
+
+
+/**
+ * Created by IntelliJ IDEA.
+ * User: Richard
+ * Date: 25.02.2004
+ * Time: 18:35:36
+ * To change this template use duplication.File | Settings | duplication.File Templates.
+ */
+
+public class Method implements Entity {
+    private String methodName;
+    private StringList methodBody;
+
+    private int noOfRelevantLines = 0;
+
+    public Method(String name) {
+        methodName = name;
+    }
+
+    public Method(String name, StringList code) {
+        methodName = name;
+        methodBody = code;
+    }
+
+    public String getName() {
+        return methodName;
+    }
+
+    public StringList getCode() {
+        return methodBody;
+    }
+
+    public int getNoOfRelevantLines() {
+        return noOfRelevantLines;
+    }
+
+    public void setNoOfRelevantLines(int norl) {
+        noOfRelevantLines = norl;
+    }
+}

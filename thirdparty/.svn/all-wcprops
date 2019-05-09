@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/research/!svn/ver/89/iPlasma/thirdparty
+END
+dom4j-1.5.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/research/!svn/ver/89/iPlasma/thirdparty/dom4j-1.5.2.jar
+END
+svnkit.jar
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/research/!svn/ver/82/iPlasma/thirdparty/svnkit.jar
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/research/!svn/ver/82/iPlasma/thirdparty/.project
+END
+persistence.jar
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/research/!svn/ver/82/iPlasma/thirdparty/persistence.jar
+END

@@ -1,0 +1,209 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication
+END
+StringList.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/StringList.java
+END
+Duplication.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/Duplication.java
+END
+Subject.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/Subject.java
+END
+DuplicationList.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/DuplicationList.java
+END
+VirtualMatrix.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/VirtualMatrix.java
+END
+EclipseMethodEntity.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/EclipseMethodEntity.java
+END
+Parameters.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/Parameters.java
+END
+MethodEntity.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/MethodEntity.java
+END
+SuffixTreeProcessor.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/SuffixTreeProcessor.java
+END
+IdenticalCompareStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/IdenticalCompareStrategy.java
+END
+VirtualColumnMatrix.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/VirtualColumnMatrix.java
+END
+CommentsCleaner.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/CommentsCleaner.java
+END
+TimeMeasurer.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/TimeMeasurer.java
+END
+WhiteSpacesCleaner.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/WhiteSpacesCleaner.java
+END
+DupLengthComparator.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/DupLengthComparator.java
+END
+SourceFile.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/SourceFile.java
+END
+Observer.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/Observer.java
+END
+Processor.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/Processor.java
+END
+DirectoryReader.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/DirectoryReader.java
+END
+IMethodEntity.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/IMethodEntity.java
+END
+DuplicationType.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/DuplicationType.java
+END
+StringCompareStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/StringCompareStrategy.java
+END
+EntityNameComparator.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/EntityNameComparator.java
+END
+Entity.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/Entity.java
+END
+CleaningDecorator.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/CleaningDecorator.java
+END
+Method.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/Method.java
+END
+CodeFragment.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/CodeFragment.java
+END
+NoiseCleaner.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/NoiseCleaner.java
+END
+LevenshteinDistanceStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/LevenshteinDistanceStrategy.java
+END
+Coordinate.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/Coordinate.java
+END
+CoordinateList.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/CoordinateList.java
+END
+MatrixLine.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/MatrixLine.java
+END
+MatrixLineList.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/MatrixLineList.java
+END
+CompareToStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/research/!svn/ver/72/iPlasma/dude/src/lrg/dude/duplication/CompareToStrategy.java
+END

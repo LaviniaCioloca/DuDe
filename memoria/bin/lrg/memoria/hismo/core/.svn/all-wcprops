@@ -1,0 +1,203 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core
+END
+PackageHistory.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/PackageHistory.java
+END
+AbstractHistoryGroup.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/AbstractHistoryGroup.java
+END
+LocalVariableHistory.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/LocalVariableHistory.java
+END
+GlobalVariableHistoryGroup.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/GlobalVariableHistoryGroup.java
+END
+AttributeHistoryGroup.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/AttributeHistoryGroup.java
+END
+NamespaceVersion.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/NamespaceVersion.java
+END
+GlobalFunctionVersion.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/GlobalFunctionVersion.java
+END
+FunctionHistory.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/FunctionHistory.java
+END
+AttributeVersion.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/AttributeVersion.java
+END
+NamespaceHistory.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/NamespaceHistory.java
+END
+GlobalFunctionHistory.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/GlobalFunctionHistory.java
+END
+AttributeHistory.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/AttributeHistory.java
+END
+MethodVersion.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/MethodVersion.java
+END
+AbstractVersion.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/AbstractVersion.java
+END
+MethodHistory.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/MethodHistory.java
+END
+AbstractHistory.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/AbstractHistory.java
+END
+PackageHistoryGroup.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/PackageHistoryGroup.java
+END
+MethodHistoryGroup.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/MethodHistoryGroup.java
+END
+SystemVersion.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/SystemVersion.java
+END
+HismoLoader.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/HismoLoader.java
+END
+GlobalFunctionHistoryGroup.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/GlobalFunctionHistoryGroup.java
+END
+NamespaceHistoryGroup.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/NamespaceHistoryGroup.java
+END
+SystemHistory.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/SystemHistory.java
+END
+ClassHistoryGroup.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/ClassHistoryGroup.java
+END
+ClassVersion.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/ClassVersion.java
+END
+ClassHistory.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/ClassHistory.java
+END
+GlobalVariableVersion.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/GlobalVariableVersion.java
+END
+VersionsList.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/VersionsList.java
+END
+VariableHistory.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/VariableHistory.java
+END
+GlobalVariableHistory.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/GlobalVariableHistory.java
+END
+LocalVariableHistoryGroup.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/LocalVariableHistoryGroup.java
+END
+PackageVersion.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/PackageVersion.java
+END
+LocalVariableVersion.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/research/!svn/ver/78/iPlasma/memoria/src/lrg/memoria/hismo/core/LocalVariableVersion.java
+END

@@ -1,0 +1,25 @@
+package lrg.dude.duplication;
+
+/**
+ * Created by IntelliJ IDEA.
+ * User: LrgMember
+ * Date: Apr 17, 2004
+ * Time: 2:51:13 PM
+ * To change this template use File | Settings | File Templates.
+ */
+public abstract class CleaningDecorator {
+    protected CleaningDecorator nextComponent;
+
+    public CleaningDecorator(CleaningDecorator next) {
+        nextComponent = next;
+    }
+
+    public StringList clean(StringList str) {
+        StringList newStr = specificClean(str);
+        if (nextComponent != null)
+            return nextComponent.clean(newStr);
+        return newStr;
+    }
+
+    protected abstract StringList specificClean(StringList s);
+}

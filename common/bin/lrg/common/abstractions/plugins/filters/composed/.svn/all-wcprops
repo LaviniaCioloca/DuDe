@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/research/!svn/ver/68/iPlasma/common/src/lrg/common/abstractions/plugins/filters/composed
+END
+AndComposedFilteringRule.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/research/!svn/ver/68/iPlasma/common/src/lrg/common/abstractions/plugins/filters/composed/AndComposedFilteringRule.java
+END
+NotComposedFilteringRule.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/research/!svn/ver/68/iPlasma/common/src/lrg/common/abstractions/plugins/filters/composed/NotComposedFilteringRule.java
+END
+OrComposedFilteringRule.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/research/!svn/ver/68/iPlasma/common/src/lrg/common/abstractions/plugins/filters/composed/OrComposedFilteringRule.java
+END

@@ -1,0 +1,43 @@
+package lrg.dude.duplication;
+
+import lrg.common.abstractions.entities.AbstractEntity;
+
+public class EclipseMethodEntity implements IMethodEntity {
+	private int noOfRelevantLines = 0;
+	AbstractEntity anEclipseMethodWrapper;
+
+	public EclipseMethodEntity(AbstractEntity anEntity) {
+		anEclipseMethodWrapper = anEntity;
+	}
+
+	public AbstractEntity getMethod() {
+		return anEclipseMethodWrapper;
+	}
+
+	public String getName() {
+		if (anEclipseMethodWrapper != null)
+			return anEclipseMethodWrapper.getName();
+		return null;
+	}
+
+	public StringList getCode() {
+
+		String theSourceCode = (String) anEclipseMethodWrapper.getProperty(
+				"SourceCode").getValue();
+
+		if (theSourceCode != null) {
+			StringList strings = new StringList(theSourceCode.split("\n"));
+			return strings;
+		}
+		return new StringList();
+	}
+
+	public int getNoOfRelevantLines() // for clustering reasons
+	{
+		return noOfRelevantLines;
+	}
+
+	public void setNoOfRelevantLines(int norl) {
+		noOfRelevantLines = norl;
+	}
+}

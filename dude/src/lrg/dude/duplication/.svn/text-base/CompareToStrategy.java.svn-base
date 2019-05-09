@@ -1,0 +1,16 @@
+package lrg.dude.duplication;
+
+/**
+ * Created by IntelliJ IDEA.
+ * User: Ricky
+ * Date: 25.11.2004
+ * Time: 15:39:34
+ * To change this template use File | Settings | File Templates.
+ */
+public class CompareToStrategy implements StringCompareStrategy {
+    public boolean similar(String source, String target) {
+        if(source.compareTo(target) == 0)
+            return true;
+        return false;
+    }
+}

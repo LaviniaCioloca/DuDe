@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/research/!svn/ver/82/iPlasma/thirdparty/clusters
+END
+jgrapht-jdk1.5.jar
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/research/!svn/ver/82/iPlasma/thirdparty/clusters/jgrapht-jdk1.5.jar
+END
+jgraph.jar
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/research/!svn/ver/82/iPlasma/thirdparty/clusters/jgraph.jar
+END
+TGGraphLayout.jar
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/research/!svn/ver/82/iPlasma/thirdparty/clusters/TGGraphLayout.jar
+END
+clusters.jar
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/research/!svn/ver/82/iPlasma/thirdparty/clusters/clusters.jar
+END
+svnClientAdapter.jar
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/research/!svn/ver/82/iPlasma/thirdparty/clusters/svnClientAdapter.jar
+END
+cloudgarden.jar
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/research/!svn/ver/82/iPlasma/thirdparty/clusters/cloudgarden.jar
+END
+svnant.jar
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/research/!svn/ver/82/iPlasma/thirdparty/clusters/svnant.jar
+END
+junit.jar
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/research/!svn/ver/82/iPlasma/thirdparty/clusters/junit.jar
+END

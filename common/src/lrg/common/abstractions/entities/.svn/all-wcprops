@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/research/!svn/ver/68/iPlasma/common/src/lrg/common/abstractions/entities
+END
+ResultEntity.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/research/!svn/ver/68/iPlasma/common/src/lrg/common/abstractions/entities/ResultEntity.java
+END
+EntityType.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/research/!svn/ver/68/iPlasma/common/src/lrg/common/abstractions/entities/EntityType.java
+END
+AbstractEntity.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/research/!svn/ver/68/iPlasma/common/src/lrg/common/abstractions/entities/AbstractEntity.java
+END
+AbstractEntityInterface.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/research/!svn/ver/68/iPlasma/common/src/lrg/common/abstractions/entities/AbstractEntityInterface.java
+END
+GroupEntity.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/research/!svn/ver/68/iPlasma/common/src/lrg/common/abstractions/entities/GroupEntity.java
+END

@@ -1,0 +1,41 @@
+package lrg.dude.duplication;
+
+/**
+ * Created by IntelliJ IDEA.
+ * User: Richard
+ * Date: 25.02.2004
+ * Time: 18:39:25
+ * To change this template use duplication.File | Settings | duplication.File Templates.
+ */
+
+public class CodeFragment {
+    private Entity entity;
+    private long beginLine;
+    private long endLine;
+
+    public CodeFragment(Entity entity, long beginLine, long endLine) {
+        this.entity = entity;
+        this.beginLine = beginLine;
+        this.endLine = endLine;
+    }
+
+    public Entity getEntity() {
+        return entity;
+    }
+
+    public String getEntityName() {
+        return entity.getName();
+    }
+
+    public long getBeginLine() {
+        return beginLine;
+    }
+
+    public long getEndLine() {
+        return endLine;
+    }
+
+    public int getLength() {
+        return (int)(endLine - beginLine + 1);
+    }
+}

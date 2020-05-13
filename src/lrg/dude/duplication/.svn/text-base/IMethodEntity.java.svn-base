@@ -1,7 +1,0 @@
-package lrg.dude.duplication;
-
-import lrg.common.abstractions.entities.AbstractEntity;
-
-public interface IMethodEntity extends Entity {
-	AbstractEntity getMethod();
-}

@@ -84,7 +84,7 @@ public class DuDe {
     		init("config.txt");
     	}
     	
-    	init(args[0]);
+    	// init(args[0]);
     	
     	Processor processor = new SuffixTreeProcessor(projectFolder, new IdenticalCompareStrategy());
     	

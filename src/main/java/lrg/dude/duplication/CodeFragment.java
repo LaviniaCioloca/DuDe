@@ -2,11 +2,11 @@ package lrg.dude.duplication;
 
 import java.io.Serializable;
 
-public class CodeFragment implements Serializable{
+public class CodeFragment implements Serializable {
 
-	private static final long serialVersionUID = 2577184349530702246L;
-	
-	private Entity entity;
+    private static final long serialVersionUID = 2577184349530702246L;
+
+    private Entity entity;
     private long beginLine;
     private long endLine;
 
@@ -33,6 +33,6 @@ public class CodeFragment implements Serializable{
     }
 
     public int getLength() {
-        return (int)(endLine - beginLine + 1);
+        return (int) (endLine - beginLine + 1);
     }
 }

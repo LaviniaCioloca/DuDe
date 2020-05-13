@@ -1,54 +1,57 @@
-  
-  package lrg.dude.duplication;
+package lrg.dude.duplication;
 
-import java.io.*;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class SourceFile implements Entity {
 
-		private static final long serialVersionUID = -1935777691950363375L;
-		private String fileName;
-	    private StringList codelines;
+    private static final long serialVersionUID = -1935777691950363375L;
+    private String fileName;
+    private StringList codelines;
 
-	    private int noOfRelevantLines = 0;
+    private int noOfRelevantLines = 0;
 
-	    /**
-	     * Constructor
-	     *
-	     * @param file File
-	     */
-	    public SourceFile(File file, String shortName) {
-	        fileName = shortName;
-	        codelines = new StringList();
-	        
-//	        System.out.println(file);  
-	        try {
-	            BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-	            String linie = null;
-	            while ((linie = in.readLine()) != null) {
-	                codelines.add(linie);
-	            }
-	            in.close();
-	        } catch (FileNotFoundException fe) {
-	            System.out.println("Nu exista fisierul " + file + ": " + fe);
-	        } catch (IOException ioe) {
-	            System.out.println("Eroare citire fisier : " + ioe);
-	        }
-	    }
+    /**
+     * Constructor
+     *
+     * @param file File
+     */
+    public SourceFile(File file, String shortName) {
+        fileName = shortName;
+        codelines = new StringList();
 
-	    public String getName() {
-	        return fileName;
-	    }
+        //	        System.out.println(file);
+        try {
+            BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+            String linie = null;
+            while ((linie = in.readLine()) != null) {
+                codelines.add(linie);
+            }
+            in.close();
+        } catch (FileNotFoundException fe) {
+            System.out.println("Nu exista fisierul " + file + ": " + fe);
+        } catch (IOException ioe) {
+            System.out.println("Eroare citire fisier : " + ioe);
+        }
+    }
 
-	    public StringList getCode() {
-	        return codelines;
-	    }
+    public String getName() {
+        return fileName;
+    }
 
-	    public int getNoOfRelevantLines() {
-	        return noOfRelevantLines;
-	    }
+    public StringList getCode() {
+        return codelines;
+    }
 
-	    public void setNoOfRelevantLines(int norl) {
-	        noOfRelevantLines = norl;
-	    }
-	}
+    public int getNoOfRelevantLines() {
+        return noOfRelevantLines;
+    }
+
+    public void setNoOfRelevantLines(int norl) {
+        noOfRelevantLines = norl;
+    }
+}

@@ -16,29 +16,25 @@
 
 package org.ardverk.collection;
 
-
 /**
  * A {@link KeyAnalyzer} for {@link Byte}s
  */
 public class ByteKeyAnalyzer extends AbstractKeyAnalyzer<Byte> {
-    
-    private static final long serialVersionUID = 3395803342983289829L;
 
     /**
      * A singleton instance of {@link ByteKeyAnalyzer}
      */
     public static final ByteKeyAnalyzer INSTANCE = new ByteKeyAnalyzer();
-    
     /**
      * The length of an {@link Byte} in bits
      */
     public static final int LENGTH = Byte.SIZE;
-    
+    private static final long serialVersionUID = 3395803342983289829L;
     /**
      * A bit mask where the first bit is 1 and the others are zero
      */
     private static final int MSB = 0x80;
-    
+
     /**
      * Returns a bit mask where the given bit is set
      */
@@ -53,7 +49,7 @@ public class ByteKeyAnalyzer extends AbstractKeyAnalyzer<Byte> {
     public int bitsPerElement() {
         return 1;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -74,21 +70,21 @@ public class ByteKeyAnalyzer extends AbstractKeyAnalyzer<Byte> {
      * {@inheritDoc}
      */
     //@Override
-    public int bitIndex(Byte key, int offsetInBits, int lengthInBits, 
-            Byte other, int otherOffsetInBits, int otherLengthInBits) {
-        
+    public int bitIndex(Byte key, int offsetInBits, int lengthInBits,
+                        Byte other, int otherOffsetInBits, int otherLengthInBits) {
+
         if (offsetInBits != 0 || otherOffsetInBits != 0) {
-            throw new IllegalArgumentException("offsetInBits=" + offsetInBits 
-                    + ", otherOffsetInBits=" + otherOffsetInBits);
+            throw new IllegalArgumentException("offsetInBits=" + offsetInBits
+                                               + ", otherOffsetInBits=" + otherOffsetInBits);
         }
-        
+
         byte keyValue = key.byteValue();
         if (keyValue == 0) {
             return NULL_BIT_KEY;
         }
 
         byte otherValue = (other != null ? other.byteValue() : 0);
-        
+
         if (keyValue != otherValue) {
             int xorValue = keyValue ^ otherValue;
             for (int i = 0; i < LENGTH; i++) {
@@ -97,25 +93,25 @@ public class ByteKeyAnalyzer extends AbstractKeyAnalyzer<Byte> {
                 }
             }
         }
-        
+
         return KeyAnalyzer.EQUAL_BIT_KEY;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     //@Override
-    public boolean isPrefix(Byte prefix, int offsetInBits, 
-            int lengthInBits, Byte key) {
-        
+    public boolean isPrefix(Byte prefix, int offsetInBits,
+                            int lengthInBits, Byte key) {
+
         int value1 = (prefix.byteValue() << offsetInBits);
         int value2 = key.byteValue();
-        
+
         int mask = 0;
         for (int i = 0; i < lengthInBits; i++) {
             mask |= (0x1 << i);
         }
-        
+
         return (value1 & mask) == (value2 & mask);
     }
 }

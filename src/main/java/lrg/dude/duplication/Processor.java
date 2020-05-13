@@ -1,5 +1,5 @@
- // add some comment
- package lrg.dude.duplication;
+// add some comment
+package lrg.dude.duplication;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -23,11 +23,10 @@ public class Processor extends Thread implements Subject {
     private long numberOfDots = 0;  //in half of the matrix (non-redundant)
     private long numberOfDuplicatedLines = 0;
 
-
     public Processor() {
-    	
+
     }
-    
+
     /**
      * Constructor for dead mode (starting with a path)
      *
@@ -38,23 +37,23 @@ public class Processor extends Thread implements Subject {
         long start = System.currentTimeMillis();
         DirectoryReader cititorDirector = new DirectoryReader(path);
         ArrayList<File> files = cititorDirector.getFilesRecursive();
-        
+
         System.err.println("FILES: " + files.size());
         if (files != null) {
             entities = new Entity[files.size()];
             for (int i = 0; i < files.size(); i++) {
-                File currentFile = (File) files.get(i);
+                File currentFile = files.get(i);
                 //TODO: aici am problema daca e cale realativa
                 String shortName = currentFile.getAbsolutePath().substring(path.length() + 1);
                 entities[i] = new SourceFile(currentFile, shortName);
             }
-        } else
+        } else {
             entities = new SourceFile[0];
+        }
         long stop = System.currentTimeMillis();
         System.out.print("\nDUDE: Got " + entities.length + " files in: ");
         System.out.println(TimeMeasurer.convertTimeToString(stop - start) + "\n");
     }
-
 
     /**
      * Constructor for the alive mode
@@ -67,7 +66,6 @@ public class Processor extends Thread implements Subject {
         referenceEntity = null;
     }
 
-
     public Processor(Entity[] methods) {
         this(methods, new IdenticalCompareStrategy());
     }
@@ -78,34 +76,45 @@ public class Processor extends Thread implements Subject {
     }
 
     public void run() {
-    	long startTime = System.currentTimeMillis();
-    	if(referenceEntity !=null) rearrangeEntities();
-    	createMatrixLines();    /*cleans code*/
-        if(referenceEntity == null) clusteredSearch();
-        else clusteredSearchWithReferenceEntity();
-       
+        long startTime = System.currentTimeMillis();
+        if (referenceEntity != null) {
+            rearrangeEntities();
+        }
+        createMatrixLines();    /*cleans code*/
+        if (referenceEntity == null) {
+            clusteredSearch();
+        } else {
+            clusteredSearchWithReferenceEntity();
+        }
+
         numberOfDuplicatedLines = matrixLines.countDuplicatedLines();
         notifyObservers();
         long currentTimeMillis = System.currentTimeMillis();
         System.out.println("Computed duplications in: " + (currentTimeMillis - startTime) + "ms");
     }
-    
 
     private void rearrangeEntities() {
-    	int referenceIndex = 0;
-    	if(referenceEntity == null) return;
-    	IMethodEntity firstEntity = (IMethodEntity) entities[0];
-    	if(firstEntity.getMethod() == referenceEntity.getMethod()) return;
-    	
-    	for(referenceIndex = 1; ((IMethodEntity)entities[referenceIndex]).getMethod() != referenceEntity.getMethod(); referenceIndex++);
-    	
-    	if(referenceIndex >= entities.length) {System.out.println("ERROR"); return; }
-    	
-    	entities[referenceIndex] = firstEntity;
-    	entities[0] = referenceEntity;
+        int referenceIndex = 0;
+        if (referenceEntity == null) {
+            return;
+        }
+        IMethodEntity firstEntity = (IMethodEntity) entities[0];
+        if (firstEntity.getMethod() == referenceEntity.getMethod()) {
+            return;
+        }
+
+        for (referenceIndex = 1; ((IMethodEntity) entities[referenceIndex]).getMethod() != referenceEntity.getMethod(); referenceIndex++) {
+        }
+
+        if (referenceIndex >= entities.length) {
+            System.out.println("ERROR");
+            return;
+        }
+
+        entities[referenceIndex] = firstEntity;
+        entities[0] = referenceEntity;
     }
 
-    
     private void clusteredSearch() {
         int startingMatrixRow = 0;
         int startingMatrixColumn = 0;
@@ -146,7 +155,7 @@ public class Processor extends Thread implements Subject {
         System.out.println("NO OF ENTITIES: " + noOfEntities);
         int noOfRows = referenceEntity.getNoOfRelevantLines();
         startingMatrixColumn = startingMatrixRow = 0;
-        for (int j = 0; j < noOfEntities; j++) {  
+        for (int j = 0; j < noOfEntities; j++) {
             int noOfColumns = entities[j].getNoOfRelevantLines();
             createMatrixCells(startingMatrixRow, noOfRows, startingMatrixColumn, noOfColumns);
             //when searching I don't have to limit width, the iterator works fine
@@ -156,7 +165,8 @@ public class Processor extends Thread implements Subject {
         }
         System.out.println("NO OF Duplicates: " + duplicates.size());
         System.out.println("NO OF Duplicate Dots: " + numberOfDots);
-    }    
+    }
+
     /**
      * Starting from the matrix lines ("clean" code), it compares the lines
      * to establish the matrix.
@@ -182,7 +192,6 @@ public class Processor extends Thread implements Subject {
         }
     }
 
-
     /**
      * Once established the duplicate lines, this method will try to group
      * the lines in Duplication entities (fragments of duplicated code)
@@ -201,16 +210,15 @@ public class Processor extends Thread implements Subject {
                 int j = ((Integer) iterator.next()).intValue();
                 //if there is a duplicate [i,j] and it hasn't been used in a previous duplication
                 if (coolMatrix.get(i, j) != null &&
-                        !((Boolean) coolMatrix.get(i, j)).booleanValue() 
-                        &&
-                        (newDup = traceDuplication(i, j)) != null
-                  ) {
-                  duplicates.add(newDup);
+                    !coolMatrix.get(i, j).booleanValue()
+                    &&
+                    (newDup = traceDuplication(i, j)) != null
+                ) {
+                    duplicates.add(newDup);
                 }
             }
         }
     }
-
 
     /**
      * Checks if the cell can be taken as part of the current duplication.
@@ -228,19 +236,15 @@ public class Processor extends Thread implements Subject {
         int oldY = reference.getY();
         int newX = oldX + dx;
         int newY = oldY + dy;
-        if (newX < matrixLines.size() && /*still within the matrix*/
-                newY < matrixLines.size() &&
+        /*not used*/
+        return newX < matrixLines.size() && /*still within the matrix*/
+               newY < matrixLines.size() &&
                 /*still within the same entity*/
-                matrixLines.get(newX).getEntity() == matrixLines.get(oldX).getEntity() &&
-                matrixLines.get(newY).getEntity() == matrixLines.get(oldY).getEntity() &&
-                (coolMatrix.get(newX, newY)) != null && /*is duplicate*/
-                ((Boolean) coolMatrix.get(newX, newY)).booleanValue() == false  /*not used*/
-        ) {
-            return true;
-        } else
-            return false;
+               matrixLines.get(newX).getEntity() == matrixLines.get(oldX).getEntity() &&
+               matrixLines.get(newY).getEntity() == matrixLines.get(oldY).getEntity() &&
+               (coolMatrix.get(newX, newY)) != null && /*is duplicate*/
+               coolMatrix.get(newX, newY).booleanValue() == false;
     }
-
 
     /**
      * Tries to find a valid coordinate to be added to the current Duplication
@@ -252,8 +256,9 @@ public class Processor extends Thread implements Subject {
         if (validCoordinate(start, 1, 1)) {
             return new Coordinate(start.getX() + 1, start.getY() + 1);
         }
-        if (currentExactSize < params.getMinExactChunk())
+        if (currentExactSize < params.getMinExactChunk()) {
             return null;
+        }
         for (int i = 1; i <= params.getMaxLineBias(); i++) {
             if (validCoordinate(start, 1, 1 + i)) {
                 return new Coordinate(start.getX() + 1, start.getY() + 1 + i);
@@ -271,7 +276,6 @@ public class Processor extends Thread implements Subject {
         }
         return null;
     }
-
 
     /**
      * Starting from a duplicate cell in the matrix, this method will
@@ -293,16 +297,18 @@ public class Processor extends Thread implements Subject {
             Coordinate previous = coordinates.get(coordinates.size() - 1);
             /*check that the duplication is not within the same entity,
             and the end of the referenceCode has not reached the start of the dupCode*/
-            if (current.getX() < start.getY())
+            if (current.getX() < start.getY()) {
                 coordinates.add(current);
-            else
+            } else {
                 continue;
+            }
             int dx = current.getX() - previous.getX();
             int dy = current.getY() - previous.getY();
-            if (dx == 1 && dy == 1)
+            if (dx == 1 && dy == 1) {
                 currentExactChunkSize++;
-            else
+            } else {
                 currentExactChunkSize = 1;
+            }
         }
         if (currentExactChunkSize < params.getMinExactChunk()) {
             //remove coordinates representing the last exact chunk
@@ -317,12 +323,12 @@ public class Processor extends Thread implements Subject {
             int lengthX = end.getX() - start.getX() + 1;
             int lengthY = end.getY() - start.getY() + 1;
             int length = lengthX <= lengthY ? lengthX : lengthY;
-            if (length >= params.getMinLength())
+            if (length >= params.getMinLength()) {
                 return makeDuplication(coordinates, length);
+            }
         }
         return null;
     }
-
 
     /**
      * Makes a duplication entity starting from a list of coordinates
@@ -344,13 +350,12 @@ public class Processor extends Thread implements Subject {
         MatrixLine duplicateStart = matrixLines.get(start.getY());
         MatrixLine duplicateEnd = matrixLines.get(end.getY());
         CodeFragment referenceCode = new CodeFragment(referenceStart.getEntity(),
-                referenceStart.getRealIndex(), referenceEnd.getRealIndex());
+                                                      referenceStart.getRealIndex(), referenceEnd.getRealIndex());
         CodeFragment duplicateCode = new CodeFragment(duplicateStart.getEntity(),
-                duplicateStart.getRealIndex(), duplicateEnd.getRealIndex());
+                                                      duplicateStart.getRealIndex(), duplicateEnd.getRealIndex());
         newDuplication = new Duplication(referenceCode, duplicateCode, type, signature, length);
         return newDuplication;
     }
-
 
     /**
      * Marks the used coordinates in the matrix
@@ -368,7 +373,6 @@ public class Processor extends Thread implements Subject {
         }
     }
 
-
     /**
      * Extracts the duplication type, from a given signature
      *
@@ -380,17 +384,20 @@ public class Processor extends Thread implements Subject {
         int iModified = buffer.indexOf("M");
         int iDelete = buffer.indexOf("D");
         int iInsert = buffer.indexOf("I");
-        if (iModified < 0 && iDelete < 0 && iInsert < 0)
+        if (iModified < 0 && iDelete < 0 && iInsert < 0) {
             return DuplicationType.EXACT;
-        if (iModified > -1 && iDelete < 0 && iInsert < 0)
+        }
+        if (iModified > -1 && iDelete < 0 && iInsert < 0) {
             return DuplicationType.MODIFIED;
-        if (iModified < 0 && iDelete > -1 && iInsert < 0)
+        }
+        if (iModified < 0 && iDelete > -1 && iInsert < 0) {
             return DuplicationType.DELETE;
-        if (iModified < 0 && iDelete < 0 && iInsert > -1)
+        }
+        if (iModified < 0 && iDelete < 0 && iInsert > -1) {
             return DuplicationType.INSERT;
+        }
         return DuplicationType.COMPOSED;
     }
-
 
     /**
      * Extracts a duplicate signature starting from a list of Coordinates
@@ -428,7 +435,6 @@ public class Processor extends Thread implements Subject {
         return signature.toString();
     }
 
-
     /**
      * Having the entities (method bodies, files etc.) the method will create
      * an array of Strings with "clean" code (without the code that should be ignored).
@@ -441,7 +447,9 @@ public class Processor extends Thread implements Subject {
         int noOfMatrixLinesBefore, noOfMatrixLinesAfter;
         for (int i = 0; i < entities.length; i++) {
             noOfMatrixLinesBefore = matrixLines.size();
-            if (entities[i] == null) { System.out.println("null"); }
+            if (entities[i] == null) {
+                System.out.println("null");
+            }
             matrixLines.addAll(entityToMatrixLines(entities[i]));
             noOfMatrixLinesAfter = matrixLines.size();
             entities[i].setNoOfRelevantLines(noOfMatrixLinesAfter - noOfMatrixLinesBefore);
@@ -452,21 +460,21 @@ public class Processor extends Thread implements Subject {
         System.out.println(TimeMeasurer.convertTimeToString(stop - start) + "\n");
         return matrixLines;
     }
-   
-    
+
     private void setRelevantLinesForReferenceEntity(Entity entity) {
-    	if(referenceEntity == null) return;
-    	IMethodEntity reference = referenceEntity;
-    	IMethodEntity crtEntity = (IMethodEntity) entity;
-    	
-    	if(reference.getMethod() == crtEntity.getMethod())  {
-    		reference.setNoOfRelevantLines(entity.getNoOfRelevantLines());
-    	}
-		
-	}
+        if (referenceEntity == null) {
+            return;
+        }
+        IMethodEntity reference = referenceEntity;
+        IMethodEntity crtEntity = (IMethodEntity) entity;
 
+        if (reference.getMethod() == crtEntity.getMethod()) {
+            reference.setNoOfRelevantLines(entity.getNoOfRelevantLines());
+        }
 
-	/**
+    }
+
+    /**
      * Filters the source code fragment
      *
      * @param bruteText Code unfiltered
@@ -475,10 +483,11 @@ public class Processor extends Thread implements Subject {
     private StringList cleanCode(StringList bruteText) {
         CleaningDecorator commonCleaner = new WhiteSpacesCleaner(new NoiseCleaner(null));
         CleaningDecorator cleaner;
-        if (!params.isConsiderComments())
+        if (!params.isConsiderComments()) {
             cleaner = new CommentsCleaner(commonCleaner);
-        else
+        } else {
             cleaner = commonCleaner;
+        }
         return cleaner.clean(bruteText);
     }
 
@@ -514,17 +523,19 @@ public class Processor extends Thread implements Subject {
     }
 
     public long getNumberOfCleanLines() {
-        if (matrixLines != null)
+        if (matrixLines != null) {
             return matrixLines.size();
-        else
+        } else {
             return -1;
+        }
     }
 
     public int getNumberOfEntities() {
-        if (entities != null)
+        if (entities != null) {
             return entities.length;
-        else
+        } else {
             return -1;
+        }
     }
 
     public long getNumberOfDots() {
@@ -538,7 +549,6 @@ public class Processor extends Thread implements Subject {
     public long getNumberOfDuplicatedLines() {
         return numberOfDuplicatedLines;
     }
-
 
     /**
      * Pentru eventuale date statistice
@@ -564,8 +574,9 @@ public class Processor extends Thread implements Subject {
 
     public void notifyObservers() {
         Iterator<Observer> iterator = observers.iterator();
-        while (iterator.hasNext())
+        while (iterator.hasNext()) {
             (iterator.next()).getDuplication(this);
+        }
     }
 
     public void setParams(Parameters params) {

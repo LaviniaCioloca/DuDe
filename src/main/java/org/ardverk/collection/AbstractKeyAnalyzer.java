@@ -17,8 +17,38 @@
 package org.ardverk.collection;
 
 public abstract class AbstractKeyAnalyzer<K> implements KeyAnalyzer<K> {
-    
+
     private static final long serialVersionUID = -20497563720380683L;
+
+    /**
+     * Returns true if bitIndex is a {@link KeyAnalyzer#OUT_OF_BOUNDS_BIT_KEY}
+     */
+    static boolean isOutOfBoundsIndex(int bitIndex) {
+        return bitIndex == OUT_OF_BOUNDS_BIT_KEY;
+    }
+
+    /**
+     * Returns true if bitIndex is a {@link KeyAnalyzer#EQUAL_BIT_KEY}
+     */
+    static boolean isEqualBitKey(int bitIndex) {
+        return bitIndex == EQUAL_BIT_KEY;
+    }
+
+    /**
+     * Returns true if bitIndex is a {@link KeyAnalyzer#NULL_BIT_KEY}
+     */
+    static boolean isNullBitKey(int bitIndex) {
+        return bitIndex == NULL_BIT_KEY;
+    }
+
+    /**
+     * Returns true if the given bitIndex is valid. Indices
+     * are considered valid if they're between 0 and
+     * {@link Integer#MAX_VALUE}
+     */
+    static boolean isValidBitIndex(int bitIndex) {
+        return 0 <= bitIndex && bitIndex <= Integer.MAX_VALUE;
+    }
 
     /**
      * {@inheritDoc}
@@ -31,37 +61,7 @@ public abstract class AbstractKeyAnalyzer<K> implements KeyAnalyzer<K> {
         } else if (o2 == null) {
             return (o1 == null) ? 0 : 1;
         }
-        
-        return ((Comparable<K>)o1).compareTo(o2);
-    }
-    
-    /** 
-     * Returns true if bitIndex is a {@link KeyAnalyzer#OUT_OF_BOUNDS_BIT_KEY}
-     */
-    static boolean isOutOfBoundsIndex(int bitIndex) {
-        return bitIndex == OUT_OF_BOUNDS_BIT_KEY;
-    }
 
-    /** 
-     * Returns true if bitIndex is a {@link KeyAnalyzer#EQUAL_BIT_KEY}
-     */
-    static boolean isEqualBitKey(int bitIndex) {
-        return bitIndex == EQUAL_BIT_KEY;
-    }
-
-    /** 
-     * Returns true if bitIndex is a {@link KeyAnalyzer#NULL_BIT_KEY} 
-     */
-    static boolean isNullBitKey(int bitIndex) {
-        return bitIndex == NULL_BIT_KEY;
-    }
-
-    /** 
-     * Returns true if the given bitIndex is valid. Indices 
-     * are considered valid if they're between 0 and 
-     * {@link Integer#MAX_VALUE}
-     */
-    static boolean isValidBitIndex(int bitIndex) {
-        return 0 <= bitIndex && bitIndex <= Integer.MAX_VALUE;
+        return ((Comparable<K>) o1).compareTo(o2);
     }
 }

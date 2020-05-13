@@ -30,15 +30,16 @@ import java.util.SortedMap;
  */
 public class Tries {
 
-    private Tries() {}
-   
+    private Tries() {
+    }
+
     /**
      * Returns true if both values are either null or equal
      */
     static boolean compare(Object a, Object b) {
         return (a == null ? b == null : a.equals(b));
     }
-   
+
     /**
      * Returns a synchronized instance of a {@link Trie}
      *
@@ -48,14 +49,14 @@ public class Tries {
         if (trie == null) {
             throw new NullPointerException("trie");
         }
-       
+
         if (trie instanceof SynchronizedTrie) {
             return trie;
         }
-       
+
         return new SynchronizedTrie<K, V>(trie);
     }
-   
+
     /**
      * Returns a synchronized instance of a {@link SortedTrie}
      *
@@ -65,14 +66,14 @@ public class Tries {
         if (trie == null) {
             throw new NullPointerException("trie");
         }
-       
+
         if (trie instanceof SynchronizedSortedTrie) {
             return trie;
         }
-       
+
         return new SynchronizedSortedTrie<K, V>(trie);
     }
-   
+
     /**
      * Returns an unmodifiable instance of a {@link Trie}
      *
@@ -82,14 +83,14 @@ public class Tries {
         if (trie == null) {
             throw new NullPointerException("trie");
         }
-       
+
         if (trie instanceof UnmodifiableTrie) {
             return trie;
         }
-       
+
         return new UnmodifiableTrie<K, V>(trie);
     }
-   
+
     /**
      * Returns an unmodifiable instance of a {@link SortedTrie}
      *
@@ -99,34 +100,34 @@ public class Tries {
         if (trie == null) {
             throw new NullPointerException("trie");
         }
-       
+
         if (trie instanceof UnmodifiableSortedTrie) {
             return trie;
         }
-       
+
         return new UnmodifiableSortedTrie<K, V>(trie);
     }
-   
+
     /**
      * A synchronized {@link Trie}
      */
     private static class SynchronizedTrie<K, V> implements Trie<K, V>, Serializable {
-       
+
         private static final long serialVersionUID = 3121878833178676939L;
-       
+
         private final Trie<K, V> delegate;
-       
+
         public SynchronizedTrie(Trie<K, V> delegate) {
             if (delegate == null) {
                 throw new NullPointerException("delegate");
             }
-           
+
             this.delegate = delegate;
         }
 
         //@Override
         public synchronized Entry<K, V> select(K key,
-                Cursor<? super K, ? super V> cursor) {
+                                               Cursor<? super K, ? super V> cursor) {
             return delegate.select(key, cursor);
         }
 
@@ -149,7 +150,7 @@ public class Tries {
         public synchronized Entry<K, V> traverse(Cursor<? super K, ? super V> cursor) {
             return delegate.traverse(cursor);
         }
-       
+
         //@Override
         public synchronized Set<Entry<K, V>> entrySet() {
             return new SynchronizedSet<Entry<K, V>>(this, delegate.entrySet());
@@ -163,7 +164,7 @@ public class Tries {
         //@Override
         public synchronized Collection<V> values() {
             return new SynchronizedCollection<V>(this,
-                    delegate.values());
+                                                 delegate.values());
         }
 
         //@Override
@@ -201,7 +202,6 @@ public class Tries {
             delegate.putAll(m);
         }
 
-
         //@Override
         public synchronized V remove(Object key) {
             return delegate.remove(key);
@@ -211,38 +211,38 @@ public class Tries {
         public synchronized int size() {
             return delegate.size();
         }
-       
+
         //@Override
         public synchronized int hashCode() {
             return delegate.hashCode();
         }
-       
+
         //@Override
         public synchronized boolean equals(Object obj) {
             return delegate.equals(obj);
         }
-       
+
         //@Override
         public synchronized String toString() {
             return delegate.toString();
         }
     }
-   
+
     /**
      * A synchronized {@link SortedTrie}
      */
     private static class SynchronizedSortedTrie<K, V> extends SynchronizedTrie<K, V>
-                implements SortedTrie<K, V>, Serializable {
-       
+            implements SortedTrie<K, V>, Serializable {
+
         private static final long serialVersionUID = -2157692899702159431L;
-       
+
         private final SortedTrie<K, V> delegate;
-       
+
         public SynchronizedSortedTrie(SortedTrie<K, V> delegate) {
             super(delegate);
             this.delegate = delegate;
         }
-       
+
         //@Override
         public synchronized K lastKey() {
             return delegate.lastKey();
@@ -251,15 +251,15 @@ public class Tries {
         //@Override
         public synchronized SortedMap<K, V> subMap(K fromKey, K toKey) {
             return new SynchronizedSortedMap<K, V>(this,
-                    delegate.subMap(fromKey, toKey));
+                                                   delegate.subMap(fromKey, toKey));
         }
 
         //@Override
         public synchronized SortedMap<K, V> tailMap(K fromKey) {
             return new SynchronizedSortedMap<K, V>(this,
-                    delegate.tailMap(fromKey));
+                                                   delegate.tailMap(fromKey));
         }
-       
+
         //@Override
         public synchronized Comparator<? super K> comparator() {
             return delegate.comparator();
@@ -274,7 +274,7 @@ public class Tries {
         public synchronized SortedMap<K, V> headMap(K toKey) {
             return new SynchronizedSortedMap<K, V>(this, delegate.headMap(toKey));
         }
-       
+
         //@Override
         public synchronized SortedMap<K, V> getPrefixedBy(K key, int offset, int length) {
             return new SynchronizedSortedMap<K, V>(this, delegate.getPrefixedBy(key, offset, length));
@@ -283,49 +283,49 @@ public class Tries {
         //@Override
         public synchronized SortedMap<K, V> getPrefixedBy(K key, int length) {
             return new SynchronizedSortedMap<K, V>(this,
-                    delegate.getPrefixedBy(key, length));
+                                                   delegate.getPrefixedBy(key, length));
         }
 
         //@Override
         public synchronized SortedMap<K, V> getPrefixedBy(K key) {
             return new SynchronizedSortedMap<K, V>(this,
-                    delegate.getPrefixedBy(key));
+                                                   delegate.getPrefixedBy(key));
         }
 
         //@Override
         public synchronized SortedMap<K, V> getPrefixedByBits(K key, int lengthInBits) {
             return new SynchronizedSortedMap<K, V>(this,
-                    delegate.getPrefixedByBits(key, lengthInBits));
+                                                   delegate.getPrefixedByBits(key, lengthInBits));
         }
 
         //@Override
         public synchronized SortedMap<K, V> getPrefixedByBits(K key,
-                int offsetInBits, int lengthInBits) {
+                                                              int offsetInBits, int lengthInBits) {
             return new SynchronizedSortedMap<K, V>(this,
-                    delegate.getPrefixedByBits(key, offsetInBits, lengthInBits));
+                                                   delegate.getPrefixedByBits(key, offsetInBits, lengthInBits));
         }
     }
-   
+
     /**
      * A synchronized {@link Collection}
      */
     private static class SynchronizedCollection<E> implements Collection<E>, Serializable {
-       
+
         private static final long serialVersionUID = 2625364158304884729L;
 
         private final Object lock;
-       
+
         private final Collection<E> delegate;
-       
+
         public SynchronizedCollection(final Object lock, final Collection<E> delegate) {
             if (lock == null) {
                 throw new NullPointerException("lock");
             }
-           
+
             if (delegate == null) {
                 throw new NullPointerException("delegate");
             }
-           
+
             this.lock = lock;
             this.delegate = delegate;
         }
@@ -407,7 +407,6 @@ public class Tries {
             }
         }
 
-
         //@Override
         public Object[] toArray() {
             synchronized (lock) {
@@ -421,21 +420,21 @@ public class Tries {
                 return delegate.toArray(a);
             }
         }
-       
+
         //@Override
         public int hashCode() {
             synchronized (delegate) {
                 return delegate.hashCode();
             }
         }
-       
+
         //@Override
         public boolean equals(Object obj) {
             synchronized (delegate) {
                 return delegate.equals(obj);
             }
         }
-       
+
         //@Override
         public String toString() {
             synchronized (lock) {
@@ -443,40 +442,40 @@ public class Tries {
             }
         }
     }
-   
+
     /**
      * A synchronized {@link Set}
      */
     private static class SynchronizedSet<E> extends SynchronizedCollection<E>
             implements Set<E> {
-       
+
         private static final long serialVersionUID = -6998017897934241309L;
 
         public SynchronizedSet(Object lock, Collection<E> deleate) {
             super(lock, deleate);
         }
     }
-   
+
     /**
      * A synchronized {@link SortedMap}
      */
     private static class SynchronizedSortedMap<K, V> implements SortedMap<K, V>, Serializable {
-       
+
         private static final long serialVersionUID = 3654589935305688739L;
 
         private final Object lock;
-       
+
         private final SortedMap<K, V> delegate;
-       
+
         public SynchronizedSortedMap(Object lock, SortedMap<K, V> delegate) {
             if (lock == null) {
                 throw new NullPointerException("lock");
             }
-           
+
             if (delegate == null) {
                 throw new NullPointerException("delegate");
             }
-           
+
             this.lock = lock;
             this.delegate = delegate;
         }
@@ -491,8 +490,8 @@ public class Tries {
         //@Override
         public Set<Entry<K, V>> entrySet() {
             synchronized (lock) {
-                return new SynchronizedSet<Entry<K,V>>(lock,
-                        delegate.entrySet());
+                return new SynchronizedSet<Entry<K, V>>(lock,
+                                                        delegate.entrySet());
             }
         }
 
@@ -507,7 +506,7 @@ public class Tries {
         public SortedMap<K, V> headMap(K toKey) {
             synchronized (lock) {
                 return new SynchronizedSortedMap<K, V>(lock,
-                        delegate.headMap(toKey));
+                                                       delegate.headMap(toKey));
             }
         }
 
@@ -529,7 +528,7 @@ public class Tries {
         public SortedMap<K, V> subMap(K fromKey, K toKey) {
             synchronized (lock) {
                 return new SynchronizedSortedMap<K, V>(lock,
-                        delegate.subMap(fromKey, toKey));
+                                                       delegate.subMap(fromKey, toKey));
             }
         }
 
@@ -537,7 +536,7 @@ public class Tries {
         public SortedMap<K, V> tailMap(K fromKey) {
             synchronized (lock) {
                 return new SynchronizedSortedMap<K, V>(lock,
-                        delegate.tailMap(fromKey));
+                                                       delegate.tailMap(fromKey));
             }
         }
 
@@ -610,21 +609,21 @@ public class Tries {
                 return delegate.size();
             }
         }
-       
+
         //@Override
         public int hashCode() {
             synchronized (delegate) {
                 return delegate.hashCode();
             }
         }
-       
+
         //@Override
         public boolean equals(Object obj) {
             synchronized (delegate) {
                 return delegate.equals(obj);
             }
         }
-       
+
         //@Override
         public String toString() {
             synchronized (lock) {
@@ -632,24 +631,24 @@ public class Tries {
             }
         }
     }
-   
+
     /**
      * An unmodifiable {@link Trie}
      */
     private static class UnmodifiableTrie<K, V> implements Trie<K, V>, Serializable {
-       
+
         private static final long serialVersionUID = -7156426030315945159L;
-       
+
         private final Trie<K, V> delegate;
-       
+
         public UnmodifiableTrie(Trie<K, V> delegate) {
             if (delegate == null) {
                 throw new NullPointerException("delegate");
             }
-           
+
             this.delegate = delegate;
         }
-       
+
         //@Override
         public Entry<K, V> select(K key, final Cursor<? super K, ? super V> cursor) {
             Cursor<K, V> c = new Cursor<K, V>() {
@@ -661,14 +660,13 @@ public class Tries {
                         case REMOVE_AND_EXIT:
                             throw new UnsupportedOperationException();
                     }
-                   
+
                     return decision;
                 }
             };
-           
+
             return delegate.select(key, c);
         }
-
 
         //@Override
         public Entry<K, V> select(K key) {
@@ -696,11 +694,11 @@ public class Tries {
                         case REMOVE_AND_EXIT:
                             throw new UnsupportedOperationException();
                     }
-                   
+
                     return decision;
                 }
             };
-           
+
             return delegate.traverse(c);
         }
 
@@ -708,7 +706,7 @@ public class Tries {
         public Set<Entry<K, V>> entrySet() {
             return Collections.unmodifiableSet(delegate.entrySet());
         }
-       
+
         //@Override
         public Set<K> keySet() {
             return Collections.unmodifiableSet(delegate.keySet());
@@ -763,38 +761,38 @@ public class Tries {
         public int size() {
             return delegate.size();
         }
-       
+
         //@Override
         public int hashCode() {
             return delegate.hashCode();
         }
-       
+
         //@Override
         public boolean equals(Object obj) {
             return delegate.equals(obj);
         }
-       
+
         //@Override
         public String toString() {
             return delegate.toString();
         }
     }
-   
+
     /**
      * An unmodifiable {@link SortedTrie}
      */
     private static class UnmodifiableSortedTrie<K, V> extends UnmodifiableTrie<K, V>
             implements SortedTrie<K, V>, Serializable {
-       
+
         private static final long serialVersionUID = 842814912848446281L;
-       
+
         private final SortedTrie<K, V> delegate;
-       
+
         public UnmodifiableSortedTrie(SortedTrie<K, V> delegate) {
             super(delegate);
             this.delegate = delegate;
         }
-       
+
         //@Override
         public K firstKey() {
             return delegate.firstKey();
@@ -820,7 +818,7 @@ public class Tries {
         public SortedMap<K, V> tailMap(K fromKey) {
             return Collections.unmodifiableSortedMap(delegate.tailMap(fromKey));
         }
-       
+
         //@Override
         public SortedMap<K, V> getPrefixedBy(K key, int offset, int length) {
             return Collections.unmodifiableSortedMap(
@@ -844,10 +842,10 @@ public class Tries {
             return Collections.unmodifiableSortedMap(
                     delegate.getPrefixedByBits(key, lengthInBits));
         }
-       
+
         //@Override
         public SortedMap<K, V> getPrefixedByBits(K key, int offsetInBits,
-                int lengthInBits) {
+                                                 int lengthInBits) {
             return Collections.unmodifiableSortedMap(
                     delegate.getPrefixedByBits(key, offsetInBits, lengthInBits));
         }

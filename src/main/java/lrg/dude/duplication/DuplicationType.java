@@ -9,14 +9,13 @@ package lrg.dude.duplication;
 
 import java.io.Serializable;
 
-public class DuplicationType implements Serializable{
-	private static final long serialVersionUID = -4994852310049586480L;
-	public static final DuplicationType EXACT = new DuplicationType("EXACT");
+public class DuplicationType implements Serializable {
+    public static final DuplicationType EXACT = new DuplicationType("EXACT");
     public static final DuplicationType INSERT = new DuplicationType("INSERT");
     public static final DuplicationType DELETE = new DuplicationType("DELETE");
     public static final DuplicationType MODIFIED = new DuplicationType("MODIFIED");
     public static final DuplicationType COMPOSED = new DuplicationType("COMPOSED");
-
+    private static final long serialVersionUID = -4994852310049586480L;
     private final String myName; // for debug only
 
     private DuplicationType(String name) {

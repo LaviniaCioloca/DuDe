@@ -16,29 +16,25 @@
 
 package org.ardverk.collection;
 
-
 /**
  * A {@link KeyAnalyzer} for {@link Short}s
  */
 public class ShortKeyAnalyzer implements KeyAnalyzer<Short> {
-    
-    private static final long serialVersionUID = -8631376733513512017L;
 
     /**
      * A singleton instance of {@link ShortKeyAnalyzer}
      */
     public static final ShortKeyAnalyzer INSTANCE = new ShortKeyAnalyzer();
-    
     /**
      * The length of an {@link Short} in bits
      */
     public static final int LENGTH = Short.SIZE;
-    
+    private static final long serialVersionUID = -8631376733513512017L;
     /**
      * A bit mask where the first bit is 1 and the others are zero
      */
     private static final int MSB = 0x8000;
-    
+
     /**
      * Returns a bit mask where the given bit is set
      */
@@ -53,7 +49,7 @@ public class ShortKeyAnalyzer implements KeyAnalyzer<Short> {
     public int bitsPerElement() {
         return 1;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -74,21 +70,21 @@ public class ShortKeyAnalyzer implements KeyAnalyzer<Short> {
      * {@inheritDoc}
      */
     //@Override
-    public int bitIndex(Short key, int offsetInBits, int lengthInBits, 
-            Short other, int otherOffsetInBits, int otherLengthInBits) {
-        
+    public int bitIndex(Short key, int offsetInBits, int lengthInBits,
+                        Short other, int otherOffsetInBits, int otherLengthInBits) {
+
         if (offsetInBits != 0 || otherOffsetInBits != 0) {
-            throw new IllegalArgumentException("offsetInBits=" + offsetInBits 
-                    + ", otherOffsetInBits=" + otherOffsetInBits);
+            throw new IllegalArgumentException("offsetInBits=" + offsetInBits
+                                               + ", otherOffsetInBits=" + otherOffsetInBits);
         }
-        
+
         int keyValue = key.shortValue();
         if (keyValue == 0) {
             return NULL_BIT_KEY;
         }
 
         int otherValue = (other != null ? other.shortValue() : 0);
-        
+
         if (keyValue != otherValue) {
             int xorValue = keyValue ^ otherValue;
             for (int i = 0; i < LENGTH; i++) {
@@ -97,7 +93,7 @@ public class ShortKeyAnalyzer implements KeyAnalyzer<Short> {
                 }
             }
         }
-        
+
         return KeyAnalyzer.EQUAL_BIT_KEY;
     }
 
@@ -108,22 +104,22 @@ public class ShortKeyAnalyzer implements KeyAnalyzer<Short> {
     public int compare(Short o1, Short o2) {
         return o1.compareTo(o2);
     }
-    
+
     /**
      * {@inheritDoc}
      */
     //@Override
-    public boolean isPrefix(Short prefix, int offsetInBits, 
-            int lengthInBits, Short key) {
-        
+    public boolean isPrefix(Short prefix, int offsetInBits,
+                            int lengthInBits, Short key) {
+
         int value1 = (prefix.shortValue() << offsetInBits);
         int value2 = key.shortValue();
-        
+
         int mask = 0;
         for (int i = 0; i < lengthInBits; i++) {
             mask |= (0x1 << i);
         }
-        
+
         return (value1 & mask) == (value2 & mask);
     }
 }

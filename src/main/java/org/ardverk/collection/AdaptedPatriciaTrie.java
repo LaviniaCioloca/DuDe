@@ -2,12 +2,9 @@ package org.ardverk.collection;
 
 import lrg.dude.duplication.MatrixLineList;
 
-import org.ardverk.collection.PatriciaTrie;
-
-
 public class AdaptedPatriciaTrie extends PatriciaTrie<String, MatrixLineList> {
     private static final long serialVersionUID = 5155253417231339498L;
-    
+
     /**
      * {@inheritDoc}
      */
@@ -38,7 +35,7 @@ public class AdaptedPatriciaTrie extends PatriciaTrie<String, MatrixLineList> {
 
             MatrixLineList crtVal = root.getValue();
             value.addAll(crtVal);
-            
+
             return root.setKeyValue(key, value);
         }
 
@@ -49,10 +46,10 @@ public class AdaptedPatriciaTrie extends PatriciaTrie<String, MatrixLineList> {
             } else {
                 incrementModCount();
             }
-            
+
             MatrixLineList crtVal = found.getValue();
             value.addAll(crtVal);
-            
+
             return found.setKeyValue(key, value);
         }
 
@@ -77,7 +74,7 @@ public class AdaptedPatriciaTrie extends PatriciaTrie<String, MatrixLineList> {
 
                 MatrixLineList crtVal = root.getValue();
                 value.addAll(crtVal);
-                
+
                 return root.setKeyValue(key, value);
 
             } else if (AbstractKeyAnalyzer.isEqualBitKey(bitIndex)) {
@@ -86,16 +83,16 @@ public class AdaptedPatriciaTrie extends PatriciaTrie<String, MatrixLineList> {
                 /* REPLACE OLD KEY+VALUE */
                 if (found != root) {
                     incrementModCount();
-                    
+
                     MatrixLineList crtVal = found.getValue();
                     value.addAll(crtVal);
-                                        
+
                     return found.setKeyValue(key, value);
                 }
             }
         }
 
         throw new IndexOutOfBoundsException("Failed to put: "
-                + key + " -> " + value + ", " + bitIndex);
+                                            + key + " -> " + value + ", " + bitIndex);
     }
 }

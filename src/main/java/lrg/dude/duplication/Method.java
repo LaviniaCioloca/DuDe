@@ -1,11 +1,9 @@
 package lrg.dude.duplication;
 
-
-
 public class Method implements Entity {
 
-	private static final long serialVersionUID = 5547204581455252291L;
-	private String methodName;
+    private static final long serialVersionUID = 5547204581455252291L;
+    private String methodName;
     private StringList methodBody;
 
     private int noOfRelevantLines = 0;

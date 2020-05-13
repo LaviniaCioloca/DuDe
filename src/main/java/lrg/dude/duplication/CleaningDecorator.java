@@ -9,8 +9,9 @@ public abstract class CleaningDecorator {
 
     public StringList clean(StringList str) {
         StringList newStr = specificClean(str);
-        if (nextComponent != null)
+        if (nextComponent != null) {
             return nextComponent.clean(newStr);
+        }
         return newStr;
     }
 

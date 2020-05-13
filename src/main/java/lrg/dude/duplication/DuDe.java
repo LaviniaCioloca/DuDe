@@ -25,6 +25,7 @@ public class DuDe {
     public static int minExactChunk = 5;
     public static int maxLineBias = 3;
     public static ArrayList<String> fileExtensions = new ArrayList<String>();
+    public static HashMap<String, List<Duplication>> resultsMap = new HashMap<String, List<Duplication>>();
 
     private static ArrayList<String> initFileExtensions(String listOfFileExtensions) {
         return new ArrayList<String>(Arrays.asList(Pattern.compile(",").split(listOfFileExtensions, 0)));
@@ -75,8 +76,6 @@ public class DuDe {
 
     }
 
-    public static HashMap<String, List<Duplication>> resultsMap = new HashMap<String, List<Duplication>>();
-
     public static void main(String[] args) throws IOException {
         if (args.length == 0) {
             init("config.txt");
@@ -105,20 +104,20 @@ public class DuDe {
             String duplicatedFile = results[index].getDuplicateCode().getEntityName();
 
             List<Duplication> duplicationForReferenceFile = resultsMap.get(referenceFile);
-			if (duplicationForReferenceFile == null) {
-				duplicationForReferenceFile = new ArrayList<Duplication>();
-			}
+            if (duplicationForReferenceFile == null) {
+                duplicationForReferenceFile = new ArrayList<Duplication>();
+            }
             duplicationForReferenceFile.add(results[index]);
             resultsMap.put(referenceFile, duplicationForReferenceFile);
 
-			if (results[index].isSelfDuplication()) {
-				continue;
-			}
+            if (results[index].isSelfDuplication()) {
+                continue;
+            }
 
             List<Duplication> duplicationForSecondaryFile = resultsMap.get(duplicatedFile);
-			if (duplicationForSecondaryFile == null) {
-				duplicationForSecondaryFile = new ArrayList<Duplication>();
-			}
+            if (duplicationForSecondaryFile == null) {
+                duplicationForSecondaryFile = new ArrayList<Duplication>();
+            }
             duplicationForSecondaryFile.add(results[index]);
             resultsMap.put(duplicatedFile, duplicationForSecondaryFile);
         }
@@ -137,19 +136,19 @@ public class DuDe {
 
         List<ChronosImportJson> result = new ArrayList<ChronosImportJson>();
 
-		if (filename.contains("CurrencyCloud.")) {
-			System.err.println(filename);
-		}
+        if (filename.contains("CurrencyCloud.")) {
+            System.err.println(filename);
+        }
         for (Duplication crtDup : duplicationsForFile) {
             duplication_lines += crtDup.realLength();
-			if (filename.compareTo(crtDup.getReferenceCode().getEntityName()) == 0) {
-				duplicatedFiles.add(crtDup.getDuplicateCode().getEntityName());
-				if (filename.contains("CurrencyCloud.")) {
-					System.err.println("\t >>>" + crtDup.getDuplicateCode().getEntityName());
-				}
-			} else {
-				duplicatedFiles.add(crtDup.getReferenceCode().getEntityName());
-			}
+            if (filename.compareTo(crtDup.getReferenceCode().getEntityName()) == 0) {
+                duplicatedFiles.add(crtDup.getDuplicateCode().getEntityName());
+                if (filename.contains("CurrencyCloud.")) {
+                    System.err.println("\t >>>" + crtDup.getDuplicateCode().getEntityName());
+                }
+            } else {
+                duplicatedFiles.add(crtDup.getReferenceCode().getEntityName());
+            }
         }
 
         result.add(new ChronosImportJson(filename, "duplicated_lines", "duplication", duplication_lines));
@@ -168,9 +167,9 @@ public class DuDe {
         for (String file : resultsMap.keySet()) {
             List<Duplication> duplications = resultsMap.get(file);
             for (Duplication crtDup : duplications) {
-				if (crtDup.isSelfDuplication() == false) {
-					out.println(crtDup.getReferenceCode().getEntityName() + "," + crtDup.getDuplicateCode().getEntityName() + "," + crtDup.copiedLength());
-				}
+                if (crtDup.isSelfDuplication() == false) {
+                    out.println(crtDup.getReferenceCode().getEntityName() + "," + crtDup.getDuplicateCode().getEntityName() + "," + crtDup.copiedLength());
+                }
             }
         }
 

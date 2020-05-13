@@ -8,7 +8,9 @@ package lrg.dude.duplication;
  * To change this template use File | Settings | File Templates.
  */
 public interface Subject {
-    public void attach(Observer observer);
-    public void detach(Observer observer);
-    public void notifyObservers();
+    void attach(Observer observer);
+
+    void detach(Observer observer);
+
+    void notifyObservers();
 }

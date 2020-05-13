@@ -16,29 +16,25 @@
 
 package org.ardverk.collection;
 
-
 /**
  * A {@link KeyAnalyzer} for {@link Integer}s
  */
 public class IntegerKeyAnalyzer extends AbstractKeyAnalyzer<Integer> {
-    
-    private static final long serialVersionUID = 4928508653722068982L;
-    
+
     /**
      * A singleton instance of {@link IntegerKeyAnalyzer}
      */
     public static final IntegerKeyAnalyzer INSTANCE = new IntegerKeyAnalyzer();
-    
     /**
      * The length of an {@link Integer} in bits
      */
     public static final int LENGTH = Integer.SIZE;
-    
+    private static final long serialVersionUID = 4928508653722068982L;
     /**
      * A bit mask where the first bit is 1 and the others are zero
      */
     private static final int MSB = 0x80000000;
-    
+
     /**
      * Returns a bit mask where the given bit is set
      */
@@ -53,7 +49,7 @@ public class IntegerKeyAnalyzer extends AbstractKeyAnalyzer<Integer> {
     public int bitsPerElement() {
         return 1;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -74,21 +70,21 @@ public class IntegerKeyAnalyzer extends AbstractKeyAnalyzer<Integer> {
      * {@inheritDoc}
      */
     //@Override
-    public int bitIndex(Integer key, int offsetInBits, int lengthInBits, 
-            Integer other, int otherOffsetInBits, int otherLengthInBits) {
-        
+    public int bitIndex(Integer key, int offsetInBits, int lengthInBits,
+                        Integer other, int otherOffsetInBits, int otherLengthInBits) {
+
         if (offsetInBits != 0 || otherOffsetInBits != 0) {
-            throw new IllegalArgumentException("offsetInBits=" + offsetInBits 
-                    + ", otherOffsetInBits=" + otherOffsetInBits);
+            throw new IllegalArgumentException("offsetInBits=" + offsetInBits
+                                               + ", otherOffsetInBits=" + otherOffsetInBits);
         }
-        
+
         int keyValue = key.intValue();
         if (keyValue == 0) {
             return NULL_BIT_KEY;
         }
 
         int otherValue = (other != null ? other.intValue() : 0);
-        
+
         if (keyValue != otherValue) {
             int xorValue = keyValue ^ otherValue;
             for (int i = 0; i < LENGTH; i++) {
@@ -97,25 +93,25 @@ public class IntegerKeyAnalyzer extends AbstractKeyAnalyzer<Integer> {
                 }
             }
         }
-        
+
         return KeyAnalyzer.EQUAL_BIT_KEY;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     //@Override
-    public boolean isPrefix(Integer prefix, int offsetInBits, 
-            int lengthInBits, Integer key) {
-        
+    public boolean isPrefix(Integer prefix, int offsetInBits,
+                            int lengthInBits, Integer key) {
+
         int value1 = (prefix.intValue() << offsetInBits);
         int value2 = key.intValue();
-        
+
         int mask = 0;
         for (int i = 0; i < lengthInBits; i++) {
             mask |= (0x1 << i);
         }
-        
+
         return (value1 & mask) == (value2 & mask);
     }
 }

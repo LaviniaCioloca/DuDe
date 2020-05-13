@@ -12,7 +12,7 @@ public class Parameters {
         this.minExactChunk = minExactChunk;
         this.considerComments = considerComments;
     }
-    
+
     public int getMinLength() {
         return minLength;
     }

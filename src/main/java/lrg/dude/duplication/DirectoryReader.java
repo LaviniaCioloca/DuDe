@@ -23,9 +23,9 @@ public class DirectoryReader {
             return null;
         }
         for (int i = 0; i < list.length; i++) {
-            if (list[i].isFile())
+            if (list[i].isFile()) {
                 files.add(list[i]);
-            else if (list[i].isDirectory()) {
+            } else if (list[i].isDirectory()) {
                 DirectoryReader dir = new DirectoryReader(list[i].getAbsolutePath());
                 files.addAll(dir.getFilesRecursive());
             }

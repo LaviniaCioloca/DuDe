@@ -1,6 +1,5 @@
 package lrg.dude.duplication;
 
-
 import java.util.Comparator;
 
 public class EntityNameComparator implements Comparator<Duplication> {

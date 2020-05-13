@@ -4,11 +4,12 @@ import java.util.Comparator;
 
 public class DupLengthComparator implements Comparator<Duplication> {
     public int compare(Duplication d1, Duplication d2) {
-        if (d1.copiedLength() == d2.copiedLength())
+        if (d1.copiedLength() == d2.copiedLength()) {
             return 0;
-        else if (d1.copiedLength() > d2.copiedLength())
+        } else if (d1.copiedLength() > d2.copiedLength()) {
             return 1;
-        else
+        } else {
             return -1;
+        }
     }
 }

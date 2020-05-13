@@ -11,7 +11,7 @@ public class CoordinateList {
     }
 
     public Coordinate get(int index) {
-        return (Coordinate) list.get(index);
+        return list.get(index);
     }
 
     public int size() {

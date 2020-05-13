@@ -2,12 +2,12 @@ package lrg.dude.duplication;
 
 import java.io.Serializable;
 
-public interface Entity extends Serializable{
-    public String getName();
+public interface Entity extends Serializable {
+    String getName();
 
-    public StringList getCode();
+    StringList getCode();
 
-    public int getNoOfRelevantLines(); //for clustering reasons
+    int getNoOfRelevantLines(); //for clustering reasons
 
-    public void setNoOfRelevantLines(int norl); 
+    void setNoOfRelevantLines(int norl);
 }

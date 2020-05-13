@@ -1,8 +1,5 @@
 package lrg.dude.duplication;
 
-
-
-
 public class MatrixLine {
     private String code;
     private Entity entity;
@@ -15,7 +12,7 @@ public class MatrixLine {
         this.entity = entity;
         this.realIndex = realIndex;
     }
-    
+
     public MatrixLine(String code, Entity entity, int realIndex, int matrixIndex) {
         this.code = code;
         this.entity = entity;
@@ -30,7 +27,7 @@ public class MatrixLine {
     public void setCode(String code) {
         this.code = code;
     }
-    
+
     public Entity getEntity() {
         return entity;
     }
@@ -38,7 +35,7 @@ public class MatrixLine {
     public int getRealIndex() {
         return realIndex;
     }
-    
+
     public int getMatrixIndex() {
         return matrixIndex;
     }

@@ -10,16 +10,18 @@ public class MatrixLineList {
         list.add(ml);
     }
 
-    public void addAll(MatrixLineList aList){
-    	if (aList == null)
-    		return;
+    public void addAll(MatrixLineList aList) {
+        if (aList == null) {
+            return;
+        }
         int size = aList.size();
-        for(int i = 0; i < size; i++)
+        for (int i = 0; i < size; i++) {
             list.add(aList.get(i));
+        }
     }
 
     public MatrixLine get(int index) {
-        return (MatrixLine) list.get(index);
+        return list.get(index);
     }
 
     public int size() {
@@ -28,9 +30,11 @@ public class MatrixLineList {
 
     public long countDuplicatedLines() {
         long counter = 0;
-        for(int i = 0; i < list.size(); i++)
-            if(!get(i).isUnique())
+        for (int i = 0; i < list.size(); i++) {
+            if (!get(i).isUnique()) {
                 counter++;
+            }
+        }
         return counter;
     }
 }

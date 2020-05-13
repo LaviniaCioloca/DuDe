@@ -10,17 +10,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.TreeSet;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.TreeSet;
-
 public class VirtualMatrix {
+
+    private ArrayList list;
 
     public VirtualMatrix(int size) {
         list = new ArrayList();
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < size; i++) {
             list.add(new HashMap());
+        }
 
     }
 
@@ -41,10 +39,9 @@ public class VirtualMatrix {
     }
 
     public void freeLines(int start, int end) {
-        for (int i = start; i < end; i++)
+        for (int i = start; i < end; i++) {
             ((HashMap) list.get(i)).clear();
+        }
 
     }
-
-    private ArrayList list;
 }

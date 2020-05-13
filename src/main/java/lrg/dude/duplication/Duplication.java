@@ -2,9 +2,9 @@ package lrg.dude.duplication;
 
 import java.io.Serializable;
 
-public class Duplication implements Serializable{
-	private static final long serialVersionUID = -7290202303094562834L;
-	private CodeFragment referenceCode;
+public class Duplication implements Serializable {
+    private static final long serialVersionUID = -7290202303094562834L;
+    private CodeFragment referenceCode;
     private CodeFragment duplicateCode;
     private DuplicationType type;
     private String signature;   /*E12M1E3I1E4*/
@@ -28,22 +28,19 @@ public class Duplication implements Serializable{
         this.copiedLength = copiedLength;
     }
 
-
     public CodeFragment getReferenceCode() {
         return referenceCode;
     }
-
 
     public CodeFragment getDuplicateCode() {
         return duplicateCode;
     }
 
-
     public DuplicationType getType() {
         return type;
     }
 
-    public long copiedLength(){
+    public long copiedLength() {
         return copiedLength;
     }
 
@@ -54,25 +51,23 @@ public class Duplication implements Serializable{
     public String toString() {
         StringBuffer sb = new StringBuffer("[");
         sb.append(referenceCode.getEntityName() +
-                "," + referenceCode.getBeginLine() +
-                "," + referenceCode.getEndLine());
+                  "," + referenceCode.getBeginLine() +
+                  "," + referenceCode.getEndLine());
         sb.append("] - [");
         sb.append(duplicateCode.getEntityName() +
-                "," + duplicateCode.getBeginLine() +
-                "," + duplicateCode.getEndLine());
+                  "," + duplicateCode.getBeginLine() +
+                  "," + duplicateCode.getEndLine());
         sb.append("]");
         sb.append(" - copiedLength = " + copiedLength +
-                " (realLength = " + realLength +
-                ") - type = " + type +
-                " - signature = " + signature);
+                  " (realLength = " + realLength +
+                  ") - type = " + type +
+                  " - signature = " + signature);
         return new String(sb);
     }
-
 
     public String getSignature() {
         return signature;
     }
-
 
     /**
      * Makes the invert Duplication object starting with a Duplication
@@ -82,22 +77,23 @@ public class Duplication implements Serializable{
     public Duplication makeInvert() {
         StringBuffer invertSB = new StringBuffer(signature);
         DuplicationType newType;
-        if (type == DuplicationType.DELETE)
+        if (type == DuplicationType.DELETE) {
             newType = DuplicationType.INSERT;
-        else if (type == DuplicationType.INSERT)
+        } else if (type == DuplicationType.INSERT) {
             newType = DuplicationType.DELETE;
-        else
+        } else {
             newType = type;
+        }
         for (int i = 0; i < invertSB.length(); i++) {
-            if (invertSB.charAt(i) == 'D')
+            if (invertSB.charAt(i) == 'D') {
                 invertSB.setCharAt(i, 'I');
-            else if (invertSB.charAt(i) == 'I')
+            } else if (invertSB.charAt(i) == 'I') {
                 invertSB.setCharAt(i, 'D');
+            }
         }
         String invertSignature = invertSB.toString();
         return new Duplication(duplicateCode, referenceCode, newType, invertSignature, copiedLength);
     }
-
 
     /**
      * Checks if the duplications is between an entity and itself

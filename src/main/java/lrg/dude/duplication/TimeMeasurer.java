@@ -2,8 +2,9 @@ package lrg.dude.duplication;
 
 public class TimeMeasurer {
     public static String convertTimeToString(long miliseconds) {
-        if(miliseconds < 1000)
-            return new String("" + miliseconds + "ms");
+        if (miliseconds < 1000) {
+            return "" + miliseconds + "ms";
+        }
         final int totalSeconds = (int) (miliseconds / 1000);
         int hours = totalSeconds / 3600;
         int rezidualSeconds = totalSeconds % 3600;
@@ -11,17 +12,20 @@ public class TimeMeasurer {
         int seconds = rezidualSeconds % 60;
         String time = "";
         if (hours > 0) {
-            if (hours < 10)
+            if (hours < 10) {
                 time = time + "0";
+            }
             time = time + hours + "h";
         }
         if (minutes > 0) {
-            if (minutes < 10)
+            if (minutes < 10) {
                 time = time + "0";
+            }
             time = time + minutes + "m";
         }
-        if (seconds < 10)
+        if (seconds < 10) {
             time = time + "0";
+        }
         time = time + seconds + "s";
         return time;
     }

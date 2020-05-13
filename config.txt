@@ -1,0 +1,5 @@
+project.folder=/Users/laviniacioloca/Desktop/TestDuDeDuplication
+min.chunk=10
+max.linebias=30
+min.length=10
+file.extensions=java,sql

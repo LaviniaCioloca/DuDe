@@ -37,4 +37,8 @@ public class MatrixLineList {
         }
         return counter;
     }
+
+    public List<MatrixLine> getList() {
+        return list;
+    }
 }

@@ -42,4 +42,7 @@ public class StringList implements Serializable {
         return list.size();
     }
 
+    public ArrayList<String> getList() {
+        return list;
+    }
 }

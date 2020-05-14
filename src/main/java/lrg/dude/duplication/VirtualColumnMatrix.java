@@ -46,4 +46,8 @@ public class VirtualColumnMatrix {
         }
 
     }
+
+    public ArrayList<HashMap<Integer, Boolean>> getList() {
+        return list;
+    }
 }

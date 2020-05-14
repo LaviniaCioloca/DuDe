@@ -4,6 +4,7 @@ package lrg.dude.duplication;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class Processor extends Thread implements Subject {
     private ArrayList<Observer> observers = new ArrayList<Observer>();
@@ -347,12 +348,48 @@ public class Processor extends Thread implements Subject {
 
         MatrixLine referenceStart = matrixLines.get(start.getX());
         MatrixLine referenceEnd = matrixLines.get(end.getX());
+
+        final List<String> referenceCleanedLinesOfCode = new ArrayList<>();
+        for (int i = start.getX(); i <= end.getX(); ++i) {
+            referenceCleanedLinesOfCode.add(matrixLines.get(i).getCode());
+        }
+
+        System.out.println(">>> ReferenceCleanedLinesOfCode: " + referenceCleanedLinesOfCode);
+
+        final List<String> referenceLinesOfCode = new ArrayList<>();
+        for (int i = referenceStart.getRealIndex(); i < referenceEnd.getRealIndex(); ++i) {
+            referenceLinesOfCode.add(referenceStart.getEntity().getCode().get(i));
+        }
+
+        System.out.println(">>> ReferenceLinesOfCode: " + referenceLinesOfCode);
+
         MatrixLine duplicateStart = matrixLines.get(start.getY());
         MatrixLine duplicateEnd = matrixLines.get(end.getY());
+
+        final List<String> duplicateCleanedLinesOfCode = new ArrayList<>();
+        for (int i = start.getY(); i <= end.getY(); ++i) {
+            duplicateCleanedLinesOfCode.add(matrixLines.get(i).getCode());
+        }
+
+        System.out.println(">>> DuplicateCleanedLinesOfCode: " + duplicateCleanedLinesOfCode);
+
+        final List<String> duplicateLinesOfCode = new ArrayList<>();
+        for (int i = duplicateStart.getRealIndex(); i < duplicateEnd.getRealIndex(); ++i) {
+            duplicateLinesOfCode.add(duplicateStart.getEntity().getCode().get(i));
+        }
+
+        System.out.println(">>> DuplicateLinesOfCode: " + duplicateLinesOfCode);
+
         CodeFragment referenceCode = new CodeFragment(referenceStart.getEntity(),
-                                                      referenceStart.getRealIndex(), referenceEnd.getRealIndex());
+                                                      referenceStart.getRealIndex(),
+                                                      referenceEnd.getRealIndex(),
+                                                      referenceCleanedLinesOfCode,
+                                                      referenceLinesOfCode);
         CodeFragment duplicateCode = new CodeFragment(duplicateStart.getEntity(),
-                                                      duplicateStart.getRealIndex(), duplicateEnd.getRealIndex());
+                                                      duplicateStart.getRealIndex(),
+                                                      duplicateEnd.getRealIndex(),
+                                                      duplicateCleanedLinesOfCode,
+                                                      duplicateLinesOfCode);
         newDuplication = new Duplication(referenceCode, duplicateCode, type, signature, length);
         return newDuplication;
     }

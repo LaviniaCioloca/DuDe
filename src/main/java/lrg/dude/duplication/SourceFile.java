@@ -15,6 +15,10 @@ public class SourceFile implements Entity {
 
     private int noOfRelevantLines = 0;
 
+    public SourceFile() {
+
+    }
+
     /**
      * Constructor
      *
@@ -45,6 +49,14 @@ public class SourceFile implements Entity {
 
     public StringList getCode() {
         return codelines;
+    }
+
+    public void setFileName(final String fileName) {
+        this.fileName = fileName;
+    }
+
+    public void setCode(final StringList codelines) {
+        this.codelines = codelines;
     }
 
     public int getNoOfRelevantLines() {

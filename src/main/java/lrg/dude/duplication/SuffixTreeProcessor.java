@@ -4,13 +4,17 @@ import org.ardverk.collection.AdaptedPatriciaTrie;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
 
 public class SuffixTreeProcessor extends Processor {
     public static final String SPLIT_STRING = "\r\n|\r|\n";
     public static double time;
     private ArrayList<Observer> observers = new ArrayList<Observer>();
     private Entity[] entities;
+    private Entity[] entitiesWithoutCleanup;
     private IMethodEntity referenceEntity;
     private int noOfRefLines;
     private MatrixLineList matrixLines;
@@ -49,6 +53,19 @@ public class SuffixTreeProcessor extends Processor {
             entities = allFiles.toArray(new Entity[allFiles.size()]);
         } else {
             entities = new SourceFile[0];
+        }
+
+        entitiesWithoutCleanup = new Entity[entities.length];
+
+        for (int i = 0; i < entities.length; ++i) {
+            final SourceFile entity = new SourceFile();
+            entity.setFileName(entities[i].getName());
+
+            final StringList stringList = new StringList();
+            stringList.addAll(entities[i].getCode());
+            entity.setCode(stringList);
+
+            entitiesWithoutCleanup[i] = entity;
         }
         long stop = System.currentTimeMillis();
         System.out.print("\nDUDEE: Got " + entities.length + " files in: ");
@@ -200,6 +217,7 @@ public class SuffixTreeProcessor extends Processor {
             } else {
                 //if no reference entity, search dot-matrix against all previous entities
                 System.err.println("Search #" + j);
+                // System.out.println("ColMatrix: " + coolMatrix.getList());
                 searchDuplicates(startingMatrixColumn, noOfColumns);
             }
             //removeAll does also the free
@@ -224,13 +242,35 @@ public class SuffixTreeProcessor extends Processor {
         for (int j = startingMatrixColumn; j < endMatrixColumn; j++) {  //aici am corectat in loc de j = 0!! RADU
             MatrixLineList ml = new MatrixLineList();
             ml.add(matrixLines.get(j));
+
+            // System.out.println(j + " MatrixLine code: " + matrixLines.get(j).getCode());
+
             MatrixLineList newList = trie.put(matrixLines.get(j).getCode(), ml);
+
+            /*
+                newList is not null only if in the trie the matrixLine code was encountered at least once (the line is a
+                duplicate). The trie will return a MatrixLineList which contains a list with the other entities in which
+                that line of code was found and its line number
+            */
             if (null != newList) {
+                // System.out.println(">>> For that line newList with size: " + newList.size() + " is: " + newList
+                // .getList());
                 for (int i = 0; i < newList.size(); i++) {
                     if ((referenceEntity != null) &&
                         (j >= noOfRefLines && newList.get(i).getMatrixIndex() >= noOfRefLines)) {
                         continue;
                     }
+                    /*
+                        Add at position j the matrixIndexes of all the lines that are duplicate to this one:
+                        matrixLines.get(j).getCode()
+
+                        For example if the line of code at line 60 consists of the string: "model.readData()"
+                        and if this line was encountered at lines 30 and 35 then at index 60 in the matrix we will have:
+                        {30=false, 35=false}
+
+                     */
+                    // System.out.println("Will put at coordinate: " + j + " value: " + newList.get(i).getMatrixIndex
+                    // ());
                     coolMatrix.set(newList.get(i).getMatrixIndex(), j, Boolean.valueOf(false));
                     numberOfDots++;
                 }
@@ -437,12 +477,51 @@ public class SuffixTreeProcessor extends Processor {
 
         MatrixLine referenceStart = matrixLines.get(start.getX());
         MatrixLine referenceEnd = matrixLines.get(end.getX());
+
+        final List<String> referenceCleanedLinesOfCode = new ArrayList<>();
+        for (int i = start.getX(); i <= end.getX(); ++i) {
+            referenceCleanedLinesOfCode.add(matrixLines.get(i).getCode());
+        }
+
+        final Optional<Entity> referenceEntity = Arrays.stream(entitiesWithoutCleanup)
+                                                       .filter(entity -> entity.getName().equals(referenceStart.getEntity().getName()))
+                                                       .findFirst();
+
+        final List<String> referenceLinesOfCode = new ArrayList<>();
+        for (int i = referenceStart.getRealIndex(); i < referenceEnd.getRealIndex(); ++i) {
+            referenceLinesOfCode.add(referenceEntity.get().getCode().get(i - 1));
+        }
+
+        // System.out.println("Reference Entity Lines of Code: " + referenceLinesOfCode);
+
         MatrixLine duplicateStart = matrixLines.get(start.getY());
         MatrixLine duplicateEnd = matrixLines.get(end.getY());
+
+        final List<String> duplicateCleanedLinesOfCode = new ArrayList<>();
+        for (int i = start.getY(); i <= end.getY(); ++i) {
+            duplicateCleanedLinesOfCode.add(matrixLines.get(i).getCode());
+        }
+
+        final Optional<Entity> duplicateEntity = Arrays.stream(entitiesWithoutCleanup)
+                                                       .filter(entity -> entity.getName().equals(duplicateStart.getEntity().getName()))
+                                                       .findFirst();
+        final List<String> duplicateLinesOfCode = new ArrayList<>();
+        for (int i = duplicateStart.getRealIndex(); i < duplicateEnd.getRealIndex(); ++i) {
+            duplicateLinesOfCode.add(duplicateEntity.get().getCode().get(i - 1));
+        }
+
+        // System.out.println("Duplicate Entity Lines of Code: " + duplicateLinesOfCode);
+
         CodeFragment referenceCode = new CodeFragment(referenceStart.getEntity(),
-                                                      referenceStart.getRealIndex(), referenceEnd.getRealIndex());
+                                                      referenceStart.getRealIndex(),
+                                                      referenceEnd.getRealIndex(),
+                                                      referenceCleanedLinesOfCode,
+                                                      referenceLinesOfCode);
         CodeFragment duplicateCode = new CodeFragment(duplicateStart.getEntity(),
-                                                      duplicateStart.getRealIndex(), duplicateEnd.getRealIndex());
+                                                      duplicateStart.getRealIndex(),
+                                                      duplicateEnd.getRealIndex(),
+                                                      duplicateCleanedLinesOfCode,
+                                                      duplicateLinesOfCode);
         newDuplication = new Duplication(referenceCode, duplicateCode, type, signature, length);
         return newDuplication;
     }

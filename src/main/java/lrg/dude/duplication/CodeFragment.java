@@ -1,6 +1,7 @@
 package lrg.dude.duplication;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class CodeFragment implements Serializable {
 
@@ -9,11 +10,15 @@ public class CodeFragment implements Serializable {
     private Entity entity;
     private long beginLine;
     private long endLine;
+    private List<String> linesOfCleanedCode;
+    private List<String> linesOfCode;
 
-    public CodeFragment(Entity entity, long beginLine, long endLine) {
+    public CodeFragment(Entity entity, long beginLine, long endLine, List<String> linesOfCleanedCode, List<String> linesOfCode) {
         this.entity = entity;
         this.beginLine = beginLine;
         this.endLine = endLine;
+        this.linesOfCleanedCode = linesOfCleanedCode;
+        this.linesOfCode = linesOfCode;
     }
 
     public Entity getEntity() {
@@ -34,5 +39,13 @@ public class CodeFragment implements Serializable {
 
     public int getLength() {
         return (int) (endLine - beginLine + 1);
+    }
+
+    public List<String> getLinesOfCleanedCode() {
+        return linesOfCleanedCode;
+    }
+
+    public List<String> getLinesOfCode() {
+        return linesOfCode;
     }
 }

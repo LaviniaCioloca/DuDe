@@ -21,7 +21,7 @@ public class SuffixTreeProcessor extends Processor {
     private VirtualColumnMatrix coolMatrix;
     private DuplicationList duplicates;
     private StringCompareStrategy compareStrategy;
-    private Parameters params = new Parameters(0, 1, 2, false);
+    private Parameters params = new Parameters(0, 1, 2, false, false);
     //statistical data
     private long numberOfRawLines = 0;
     private long numberOfDots = 0;  //in half of the matrix (non-redundant)
@@ -96,7 +96,7 @@ public class SuffixTreeProcessor extends Processor {
         String absolutePath = currentFile.getAbsolutePath();
 
         for (String extension : DuDe.fileExtensions) {
-            if (absolutePath.endsWith(extension) && isAcceptable(absolutePath)) {
+            if (absolutePath.endsWith(extension) && checkIfTestFilesAreAccepted(absolutePath)) {
                 return true;
             }
         }
@@ -104,7 +104,15 @@ public class SuffixTreeProcessor extends Processor {
         return false;
     }
 
-    private boolean isAcceptable(String absolutePath) {
+    private boolean checkIfTestFilesAreAccepted(String absolutePath) {
+        if (absolutePath.contains("test") || absolutePath.contains("Test")) {
+            if (params.isConsiderTestFiles()) {
+                return true;
+            }
+
+            return false;
+        }
+
         return true;
     }
 
@@ -226,6 +234,7 @@ public class SuffixTreeProcessor extends Processor {
             startingMatrixColumn += noOfColumns;
         }
 
+        // System.out.println("Duplicates: " + duplicates);
         System.out.println("PAT. NO OF Duplicates: " + duplicates.size());
         System.out.println("PAT. NO OF Duplicate Dots: " + numberOfDots);
     }

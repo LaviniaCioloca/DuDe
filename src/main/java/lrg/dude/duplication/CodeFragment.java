@@ -48,4 +48,10 @@ public class CodeFragment implements Serializable {
     public List<String> getLinesOfCode() {
         return linesOfCode;
     }
+
+    @Override
+    public String toString() {
+        final String delimiter = "\n";
+        return String.join(delimiter, linesOfCode);
+    }
 }

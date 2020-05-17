@@ -17,7 +17,7 @@ public class Processor extends Thread implements Subject {
 
     private StringCompareStrategy compareStrategy;
 
-    private Parameters params = new Parameters(0, 1, 2, false);
+    private Parameters params = new Parameters(0, 1, 2, false, false);
 
     //statistical data
     private long numberOfRawLines = 0;

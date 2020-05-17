@@ -1,5 +1,7 @@
-project.folder=/Users/laviniacioloca/Desktop/TestDuDeDuplication
+project.folder=/Users/laviniacioloca/Documents/Work/Git repositories/mercury-translation
 min.chunk=10
 max.linebias=30
 min.length=10
 file.extensions=java,sql
+consider.comments=false
+consider.test.files=false

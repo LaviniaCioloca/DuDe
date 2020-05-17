@@ -1,4 +1,4 @@
-project.folder=/Users/laviniacioloca/Documents/Work/Git repositories/mercury-translation
+project.folder=.
 min.chunk=10
 max.linebias=30
 min.length=10

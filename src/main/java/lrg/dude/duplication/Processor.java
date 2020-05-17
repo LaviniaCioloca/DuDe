@@ -39,7 +39,7 @@ public class Processor extends Thread implements Subject {
         DirectoryReader cititorDirector = new DirectoryReader(path);
         ArrayList<File> files = cititorDirector.getFilesRecursive();
 
-        System.err.println("FILES: " + files.size());
+        System.out.println("FILES: " + files.size());
         if (files != null) {
             entities = new Entity[files.size()];
             for (int i = 0; i < files.size(); i++) {

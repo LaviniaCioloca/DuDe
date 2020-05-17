@@ -3,6 +3,7 @@ package lrg.dude.duplication;
 import org.ardverk.collection.AdaptedPatriciaTrie;
 
 import java.io.File;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -38,15 +39,17 @@ public class SuffixTreeProcessor extends Processor {
         DirectoryReader cititorDirector = new DirectoryReader(path);
         ArrayList<File> files = cititorDirector.getFilesRecursive();
 
-        System.err.println("FILES: " + files.size());
+        System.out.println("FILES: " + files.size());
+        System.out.println(files);
+        System.out.println("\n\n");
         if (files != null) {
             ArrayList<Entity> allFiles = new ArrayList<Entity>();
             for (int i = 0; i < files.size(); i++) {
                 File currentFile = files.get(i);
                 // this check is needed to filter only source files, else it will throw an exception
                 if (isSourceFile(currentFile)) {
-                    //TODO: aici am problema daca e cale relativa
-                    String shortName = currentFile.getAbsolutePath().substring(path.length() + 1);
+                    String shortName = currentFile.getPath().substring(path.length() + 1);
+                    System.out.println(">>> File path: " + shortName);
                     allFiles.add(new SourceFile(currentFile, shortName));
                 }
             }
@@ -93,7 +96,7 @@ public class SuffixTreeProcessor extends Processor {
     }
 
     private boolean isSourceFile(File currentFile) {
-        String absolutePath = currentFile.getAbsolutePath();
+        String absolutePath = currentFile.getPath();
 
         for (String extension : DuDe.fileExtensions) {
             if (absolutePath.endsWith(extension) && checkIfTestFilesAreAccepted(absolutePath)) {
@@ -220,11 +223,11 @@ public class SuffixTreeProcessor extends Processor {
             //search dot-matrix for duplicates
             if (referenceEntity != null) {
                 //if reference entity, search dot-matrix against the reference only
-                System.err.println("Search Ref #" + j);
+                System.out.println("Search Ref #" + j);
                 searchRefDuplicates(startingMatrixColumn, noOfColumns, noOfRefLines);
             } else {
                 //if no reference entity, search dot-matrix against all previous entities
-                System.err.println("Search #" + j);
+                System.out.println("Search #" + j);
                 // System.out.println("ColMatrix: " + coolMatrix.getList());
                 searchDuplicates(startingMatrixColumn, noOfColumns);
             }

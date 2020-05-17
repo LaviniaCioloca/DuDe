@@ -61,11 +61,11 @@ public class DuDe {
                 }
             }
         } catch (IOException e) {
-            System.err.println("No configuration file");
+            System.out.println("No configuration file");
         }
 
         if (projectFolder == null) {
-            System.err.println("No project folder specified");
+            System.out.println("No project folder specified");
             System.exit(-1);
         }
         if (fileExtensions.size() == 0) {
@@ -80,9 +80,9 @@ public class DuDe {
             fileExtensions.add(".sql");
         }
 
-        System.err.println(projectFolder);
-        System.err.println(String.join(",", fileExtensions));
-        System.err.println(minDuplicationLength);
+        System.out.println(projectFolder);
+        System.out.println(String.join(",", fileExtensions));
+        System.out.println(minDuplicationLength);
 
     }
 
@@ -149,7 +149,7 @@ public class DuDe {
         final List<String> duplicatedCodeFragments = new ArrayList<>();
 
         if (filename.contains("CurrencyCloud.")) {
-            System.err.println(filename);
+            System.out.println(filename);
         }
         for (Duplication crtDup : duplicationsForFile) {
             duplication_lines += crtDup.realLength();
@@ -159,7 +159,7 @@ public class DuDe {
                 duplicatedFiles.add(crtDup.getDuplicateCode().getEntityName());
                 duplicatedCodeFragments.add(crtDup.getDuplicateCode().toString());
                 if (filename.contains("CurrencyCloud.")) {
-                    System.err.println("\t >>>" + crtDup.getDuplicateCode().getEntityName());
+                    System.out.println("\t >>>" + crtDup.getDuplicateCode().getEntityName());
                 }
             } else {
                 duplicatedFiles.add(crtDup.getReferenceCode().getEntityName());

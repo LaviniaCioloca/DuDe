@@ -5,12 +5,15 @@ public class Parameters {
     private int maxLineBias;
     private int minExactChunk;
     private boolean considerComments;
+    private boolean considerTestFiles;
 
-    public Parameters(int minLength, int maxLineBias, int minExactChunk, boolean considerComments) {
+    public Parameters(int minLength, int maxLineBias, int minExactChunk, boolean considerComments,
+                      boolean considerTestFiles) {
         this.minLength = minLength;
         this.maxLineBias = maxLineBias;
         this.minExactChunk = minExactChunk;
         this.considerComments = considerComments;
+        this.considerTestFiles = considerTestFiles;
     }
 
     public int getMinLength() {
@@ -29,4 +32,7 @@ public class Parameters {
         return considerComments;
     }
 
+    public boolean isConsiderTestFiles() {
+        return considerTestFiles;
+    }
 }

@@ -62,6 +62,7 @@ public class Duplication implements Serializable {
                   " (realLength = " + realLength +
                   ") - type = " + type +
                   " - signature = " + signature);
+        sb.append("\nDuplicate fragment:\n" + referenceCode);
         return new String(sb);
     }
 

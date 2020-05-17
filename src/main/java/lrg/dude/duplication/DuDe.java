@@ -19,16 +19,20 @@ public class DuDe {
     public static final String MAX_LINEBIAS = "max.linebias=";
     public static final String MIN_LENGTH = "min.length=";
     public static final String FILE_EXTENSIONS = "file.extensions=";
+    public static final String CONSIDER_COMMENTS = "consider.comments=";
+    public static final String CONSIDER_TEST_FILES = "consider.test.files=";
 
     public static String projectFolder = null;
     public static int minDuplicationLength = 20;
     public static int minExactChunk = 5;
     public static int maxLineBias = 3;
-    public static ArrayList<String> fileExtensions = new ArrayList<String>();
-    public static HashMap<String, List<Duplication>> resultsMap = new HashMap<String, List<Duplication>>();
+    public static ArrayList<String> fileExtensions = new ArrayList<>();
+    public static HashMap<String, List<Duplication>> resultsMap = new HashMap<>();
+    public static boolean considerComments = true;
+    public static boolean considerTestFiles = true;
 
     private static ArrayList<String> initFileExtensions(String listOfFileExtensions) {
-        return new ArrayList<String>(Arrays.asList(Pattern.compile(",").split(listOfFileExtensions, 0)));
+        return new ArrayList<>(Arrays.asList(Pattern.compile(",").split(listOfFileExtensions, 0)));
     }
 
     private static void init(String filename) {
@@ -38,16 +42,22 @@ public class DuDe {
                     projectFolder = line.substring(PROJECT_FOLDER.length());
                 }
                 if (line.startsWith(MIN_EXACT_CHUNK)) {
-                    minExactChunk = new Integer(line.substring(MIN_EXACT_CHUNK.length()));
+                    minExactChunk = Integer.valueOf(line.substring(MIN_EXACT_CHUNK.length()));
                 }
                 if (line.startsWith(MAX_LINEBIAS)) {
-                    maxLineBias = new Integer(line.substring(MAX_LINEBIAS.length()));
+                    maxLineBias = Integer.valueOf(line.substring(MAX_LINEBIAS.length()));
                 }
                 if (line.startsWith(MIN_LENGTH)) {
-                    minDuplicationLength = new Integer(line.substring(MIN_LENGTH.length()));
+                    minDuplicationLength = Integer.valueOf(line.substring(MIN_LENGTH.length()));
                 }
                 if (line.startsWith(FILE_EXTENSIONS)) {
                     fileExtensions = initFileExtensions(line.substring(FILE_EXTENSIONS.length()));
+                }
+                if (line.startsWith(CONSIDER_COMMENTS)) {
+                    considerComments = Boolean.valueOf(line.substring(CONSIDER_COMMENTS.length()));
+                }
+                if (line.startsWith(CONSIDER_TEST_FILES)) {
+                    considerComments = Boolean.valueOf(line.substring(CONSIDER_TEST_FILES.length()));
                 }
             }
         } catch (IOException e) {
@@ -85,7 +95,7 @@ public class DuDe {
 
         Processor processor = new SuffixTreeProcessor(projectFolder, new IdenticalCompareStrategy());
 
-        Parameters params = new Parameters(minDuplicationLength, maxLineBias, minExactChunk, true);
+        Parameters params = new Parameters(minDuplicationLength, maxLineBias, minExactChunk, considerComments, considerTestFiles);
         processor.setParams(params);
 
         processor.run();
@@ -133,26 +143,35 @@ public class DuDe {
         int duplication_lines = 0;
 
         HashSet<String> duplicatedFiles = new HashSet<String>();
-
         List<ChronosImportJson> result = new ArrayList<ChronosImportJson>();
+
+        final List<String> duplicatedFileNames = new ArrayList<>();
+        final List<String> duplicatedCodeFragments = new ArrayList<>();
 
         if (filename.contains("CurrencyCloud.")) {
             System.err.println(filename);
         }
         for (Duplication crtDup : duplicationsForFile) {
             duplication_lines += crtDup.realLength();
+
             if (filename.compareTo(crtDup.getReferenceCode().getEntityName()) == 0) {
+                duplicatedFileNames.add(crtDup.getDuplicateCode().getEntityName());
                 duplicatedFiles.add(crtDup.getDuplicateCode().getEntityName());
+                duplicatedCodeFragments.add(crtDup.getDuplicateCode().toString());
                 if (filename.contains("CurrencyCloud.")) {
                     System.err.println("\t >>>" + crtDup.getDuplicateCode().getEntityName());
                 }
             } else {
                 duplicatedFiles.add(crtDup.getReferenceCode().getEntityName());
+                duplicatedFileNames.add(crtDup.getReferenceCode().getEntityName());
+                duplicatedCodeFragments.add(crtDup.getReferenceCode().toString());
             }
         }
 
-        result.add(new ChronosImportJson(filename, "duplicated_lines", "duplication", duplication_lines));
-        result.add(new ChronosImportJson(filename, "duplicated_files", "duplication", duplicatedFiles.size()));
+        // final String duplicatedFileNamesString = String.join(",", duplicatedFileNames);
+
+        result.add(new ChronosImportJson(filename, "duplicated_lines", "duplication", duplication_lines, duplicatedCodeFragments));
+        result.add(new ChronosImportJson(filename, "duplicated_files", "duplication", duplicatedFiles.size(), duplicatedFileNames));
 
         return result;
     }

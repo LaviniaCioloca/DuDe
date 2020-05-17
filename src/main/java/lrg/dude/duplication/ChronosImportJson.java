@@ -1,15 +1,19 @@
 package lrg.dude.duplication;
 
+import java.util.List;
+
 public class ChronosImportJson {
     private String file;
     private String name;
     private String category;
-    private int value;
+    private int count;
+    private List<String> value;
 
-    public ChronosImportJson(String file, String name, String category, int value) {
+    public ChronosImportJson(String file, String name, String category, int count, List<String> value) {
         this.file = file;
         this.name = name;
         this.category = category;
+        this.count = count;
         this.value = value;
     }
 
@@ -37,11 +41,19 @@ public class ChronosImportJson {
         this.category = category;
     }
 
-    public int getValue() {
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(final int count) {
+        this.count = count;
+    }
+
+    public List<String> getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(final List<String> value) {
         this.value = value;
     }
 }

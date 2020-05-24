@@ -1,7 +1,10 @@
 package lrg.dude.duplication;
 
 import com.google.gson.Gson;
+import lrg.dude.duplication.model.DuplicationFragment;
+import lrg.dude.duplication.model.StatisticResults;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
@@ -11,6 +14,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class DuDe {
@@ -30,6 +35,8 @@ public class DuDe {
     public static HashMap<String, List<Duplication>> resultsMap = new HashMap<>();
     public static boolean considerComments = true;
     public static boolean considerTestFiles = true;
+
+    private static final Map<String, List<String>> duplicationFragmentsInFiles = new HashMap<>();
 
     private static ArrayList<String> initFileExtensions(String listOfFileExtensions) {
         return new ArrayList<>(Arrays.asList(Pattern.compile(",").split(listOfFileExtensions, 0)));
@@ -80,10 +87,10 @@ public class DuDe {
             fileExtensions.add(".sql");
         }
 
-        System.out.println(projectFolder);
-        System.out.println(String.join(",", fileExtensions));
-        System.out.println(minDuplicationLength);
-
+        System.out.println("Will perform DuDe search analysis in folder: " + projectFolder);
+        System.out.println("File to be analysed will have the extensions: " + String.join(", ", fileExtensions));
+        System.out.println("The minimum duplication length is considered to be: " + minDuplicationLength + " LOC " +
+                           "(lines of code)");
     }
 
     public static void main(String[] args) throws IOException {
@@ -93,6 +100,7 @@ public class DuDe {
             init(args[0]);
         }
 
+        System.out.println("\n--- DuDe Analysis started ---\n");
         Processor processor = new SuffixTreeProcessor(projectFolder, new IdenticalCompareStrategy());
 
         Parameters params = new Parameters(minDuplicationLength, maxLineBias, minExactChunk, considerComments, considerTestFiles);
@@ -104,7 +112,7 @@ public class DuDe {
 
         if (results.length == 0) {
             System.out.println("No duplication results");
-            System.exit(-1);
+            System.exit(0);
         }
 
         ArrayList<ChronosImportJson> jsonObjects = new ArrayList<ChronosImportJson>();
@@ -126,7 +134,7 @@ public class DuDe {
 
             List<Duplication> duplicationForSecondaryFile = resultsMap.get(duplicatedFile);
             if (duplicationForSecondaryFile == null) {
-                duplicationForSecondaryFile = new ArrayList<Duplication>();
+                duplicationForSecondaryFile = new ArrayList<>();
             }
             duplicationForSecondaryFile.add(results[index]);
             resultsMap.put(duplicatedFile, duplicationForSecondaryFile);
@@ -136,14 +144,28 @@ public class DuDe {
             jsonObjects.addAll(exportDuplication(filename, resultsMap.get(filename)));
         }
 
+        final List<DuplicationFragment> duplicationFragments = new ArrayList<>();
+        duplicationFragmentsInFiles.entrySet().forEach(entry -> {
+            final DuplicationFragment duplicationFragment = new DuplicationFragment(entry.getKey(),
+                                                                                    entry.getValue().size(),
+                                                                                    entry.getValue());
+            duplicationFragments.add(duplicationFragment);
+        });
+
+        PrintWriter out = new PrintWriter("dude-duplicationFragments.json");
+        out.println(new Gson().toJson(duplicationFragments));
+        out.close();
+
         exportJson(jsonObjects);
+
+        exportStatisticResults(processor);
     }
 
     private static List<ChronosImportJson> exportDuplication(String filename, List<Duplication> duplicationsForFile) {
         int duplication_lines = 0;
 
-        HashSet<String> duplicatedFiles = new HashSet<String>();
-        List<ChronosImportJson> result = new ArrayList<ChronosImportJson>();
+        HashSet<String> duplicatedFiles = new HashSet<>();
+        List<ChronosImportJson> result = new ArrayList<>();
 
         final List<String> duplicatedFileNames = new ArrayList<>();
         final List<String> duplicatedCodeFragments = new ArrayList<>();
@@ -168,7 +190,19 @@ public class DuDe {
             }
         }
 
-        // final String duplicatedFileNamesString = String.join(",", duplicatedFileNames);
+        for (int i = 0; i < duplicatedCodeFragments.size(); ++i) {
+            if (duplicationFragmentsInFiles.get(duplicatedCodeFragments.get(i)) ==  null) {
+                final List<String> fileThatHasDuplicationFragment = new ArrayList<>();
+                fileThatHasDuplicationFragment.add(filename);
+                fileThatHasDuplicationFragment.add(duplicatedFileNames.get(i));
+
+                duplicationFragmentsInFiles.put(duplicatedCodeFragments.get(i), fileThatHasDuplicationFragment);
+            } else {
+                final List<String> fileThatHasDuplicationFragment = duplicationFragmentsInFiles.get(duplicatedCodeFragments.get(i));
+                fileThatHasDuplicationFragment.add(duplicatedFileNames.get(i));
+            }
+        }
+
 
         result.add(new ChronosImportJson(filename, "duplicated_lines", "duplication", duplication_lines, duplicatedCodeFragments));
         result.add(new ChronosImportJson(filename, "duplicated_files", "duplication", duplicatedFiles.size(), duplicatedFileNames));
@@ -192,6 +226,26 @@ public class DuDe {
             }
         }
 
+        out.close();
+    }
+
+    public static void exportStatisticResults(final Processor processor) throws FileNotFoundException {
+        final StatisticResults statisticResults = new StatisticResults();
+        statisticResults.setNumberOfFilesAnalysed(processor.getNumberOfEntities());
+        statisticResults.setNumberOfDuplicatedCodeFragments(duplicationFragmentsInFiles.size());
+
+        final Set<String> filesWithDuplicateFragments = new HashSet<>();
+        duplicationFragmentsInFiles.entrySet().forEach(entry -> {
+            entry.getValue().stream().forEach(file -> filesWithDuplicateFragments.add(file));
+        });
+
+        statisticResults.setFilesWitDuplicateFragments(filesWithDuplicateFragments);
+        statisticResults.setNumberOfFilesContainingDuplicateFragments(filesWithDuplicateFragments.size());
+        statisticResults.setPercentageOfFilesAnalysedThatHaveDuplicateFragments((double) filesWithDuplicateFragments.size() * 100 / (double) processor.getNumberOfEntities());
+
+
+        PrintWriter out = new PrintWriter("dude-StatisticResults.json");
+        out.println(new Gson().toJson(statisticResults));
         out.close();
     }
 

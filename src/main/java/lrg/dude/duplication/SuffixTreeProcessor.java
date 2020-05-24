@@ -39,9 +39,9 @@ public class SuffixTreeProcessor extends Processor {
         DirectoryReader cititorDirector = new DirectoryReader(path);
         ArrayList<File> files = cititorDirector.getFilesRecursive();
 
-        System.out.println("FILES: " + files.size());
-        System.out.println(files);
-        System.out.println("\n\n");
+        System.out.println("Total number of files in folder: " + files.size());
+        // System.out.println(files);
+        // System.out.println("\n\n");
         if (files != null) {
             ArrayList<Entity> allFiles = new ArrayList<Entity>();
             for (int i = 0; i < files.size(); i++) {
@@ -49,7 +49,7 @@ public class SuffixTreeProcessor extends Processor {
                 // this check is needed to filter only source files, else it will throw an exception
                 if (isSourceFile(currentFile)) {
                     String shortName = currentFile.getPath().substring(path.length() + 1);
-                    System.out.println(">>> File path: " + shortName);
+                    // System.out.println(">>> File path: " + shortName);
                     allFiles.add(new SourceFile(currentFile, shortName));
                 }
             }
@@ -71,8 +71,8 @@ public class SuffixTreeProcessor extends Processor {
             entitiesWithoutCleanup[i] = entity;
         }
         long stop = System.currentTimeMillis();
-        System.out.print("\nDUDEE: Got " + entities.length + " files in: ");
-        System.out.println(TimeMeasurer.convertTimeToString(stop - start) + "\n");
+        System.out.print("Got " + entities.length + " source files in: ");
+        System.out.println(TimeMeasurer.convertTimeToString(stop - start));
     }
 
     /**
@@ -170,6 +170,7 @@ public class SuffixTreeProcessor extends Processor {
      * @return array of "clean" code
      */
     public MatrixLineList createNewMatrixLines() {
+        System.out.println("Cleaning the noise out of the source files\n");
         long start = System.currentTimeMillis();
         matrixLines = new MatrixLineList();
         int noOfMatrixLinesBefore, noOfMatrixLinesAfter;
@@ -181,7 +182,8 @@ public class SuffixTreeProcessor extends Processor {
             }
 
             if (entities[i].getCode().size() < params.getMinLength()) {
-                System.out.println(entities[i].getName() + " ignored");
+                System.out.println(entities[i].getName() + " ignored because its length is smaller than minimum " +
+                                   "duplication length!");
                 continue;
             }
             matrixLines.addAll(entityToNewMatrixLines(entities[i], noOfMatrixLinesBefore));
@@ -190,7 +192,7 @@ public class SuffixTreeProcessor extends Processor {
             setRelevantLinesForReferenceEntity(entities[i]);
         }
         long stop = System.currentTimeMillis();
-        System.out.print("\nDUDE: Got " + matrixLines.size() + " lines of clean code in: ");
+        System.out.print("\nGot " + matrixLines.size() + " lines of clean code in: ");
         System.out.println(TimeMeasurer.convertTimeToString(stop - start) + "\n");
         return matrixLines;
     }
@@ -201,7 +203,7 @@ public class SuffixTreeProcessor extends Processor {
         noOfRefLines = 0;
 
         duplicates = new DuplicationList();
-        System.out.println("NO OF ENTITIES (SuffixTreeProcessor.clusteredSearchWithSuffixTries): " + noOfEntities);
+        // System.out.println("NO OF ENTITIES (SuffixTreeProcessor.clusteredSearchWithSuffixTries): " + noOfEntities);
         AdaptedPatriciaTrie trie = new AdaptedPatriciaTrie();
         startingMatrixColumn = 0;
         int totalNoOfRows = 0;
@@ -227,7 +229,7 @@ public class SuffixTreeProcessor extends Processor {
                 searchRefDuplicates(startingMatrixColumn, noOfColumns, noOfRefLines);
             } else {
                 //if no reference entity, search dot-matrix against all previous entities
-                System.out.println("Search #" + j);
+                // System.out.println("Search #" + j);
                 // System.out.println("ColMatrix: " + coolMatrix.getList());
                 searchDuplicates(startingMatrixColumn, noOfColumns);
             }
@@ -238,8 +240,8 @@ public class SuffixTreeProcessor extends Processor {
         }
 
         // System.out.println("Duplicates: " + duplicates);
-        System.out.println("PAT. NO OF Duplicates: " + duplicates.size());
-        System.out.println("PAT. NO OF Duplicate Dots: " + numberOfDots);
+        System.out.println("Number of duplicates found: " + duplicates.size());
+        // System.out.println("PAT. NO OF Duplicate Dots: " + numberOfDots);
     }
 
     /**

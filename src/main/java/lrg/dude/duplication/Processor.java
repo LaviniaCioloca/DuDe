@@ -39,7 +39,7 @@ public class Processor extends Thread implements Subject {
         DirectoryReader cititorDirector = new DirectoryReader(path);
         ArrayList<File> files = cititorDirector.getFilesRecursive();
 
-        System.out.println("FILES: " + files.size());
+        System.out.println("Total number of files in folder: " + files.size());
         if (files != null) {
             entities = new Entity[files.size()];
             for (int i = 0; i < files.size(); i++) {
@@ -124,7 +124,7 @@ public class Processor extends Thread implements Subject {
         //progressMessage = "" + matrixPieces;
         coolMatrix = new VirtualMatrix(matrixLines.size());
         duplicates = new DuplicationList();
-        System.out.println("NO OF ENTITIES (Processor.clusteredSearch): " + noOfEntities);
+        // System.out.println("NO OF ENTITIES (Processor.clusteredSearch): " + noOfEntities);
         for (int i = 0; i < noOfEntities; i++) {  //for every entity
             int noOfRows = entities[i].getNoOfRelevantLines();
             startingMatrixColumn = startingMatrixRow;

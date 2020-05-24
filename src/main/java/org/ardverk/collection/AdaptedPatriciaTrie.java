@@ -1,6 +1,6 @@
 package org.ardverk.collection;
 
-import lrg.dude.duplication.MatrixLineList;
+import lrg.dude.duplication.model.MatrixLineList;
 
 public class AdaptedPatriciaTrie extends PatriciaTrie<String, MatrixLineList> {
     private static final long serialVersionUID = 5155253417231339498L;

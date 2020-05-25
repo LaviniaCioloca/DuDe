@@ -244,11 +244,19 @@ public class DuDe {
 
         statisticResults.setFilesWitDuplicateFragments(filesWithDuplicateFragments);
         statisticResults.setNumberOfFilesContainingDuplicateFragments(filesWithDuplicateFragments.size());
-        statisticResults.setPercentageOfFilesAnalysedThatHaveDuplicateFragments((double) filesWithDuplicateFragments.size() * 100 / (double) processor.getNumberOfEntities());
+
+        final double percentageOfFilesAnalysedThatHaveDuplicateFragments = calculate2DecimalPlacesPercentageOfDuplication(filesWithDuplicateFragments.size(),
+                                                                                                                          processor.getNumberOfEntities());
+        statisticResults.setPercentageOfFilesAnalysedThatHaveDuplicateFragments(percentageOfFilesAnalysedThatHaveDuplicateFragments);
 
         PrintWriter out = new PrintWriter("dude-StatisticResults.json");
         out.println(new Gson().toJson(statisticResults));
         out.close();
+    }
+
+    private static double calculate2DecimalPlacesPercentageOfDuplication(final int filesWithDuplicateFragments,
+                                                                         final int totalNumberOfFiles) {
+        return Math.floor((double) filesWithDuplicateFragments * 100 / (double) totalNumberOfFiles * 100) / 100;
     }
 
 }

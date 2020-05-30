@@ -242,7 +242,7 @@ public class DuDe {
             entry.getValue().stream().forEach(file -> filesWithDuplicateFragments.add(file));
         });
 
-        statisticResults.setFilesWitDuplicateFragments(filesWithDuplicateFragments);
+        statisticResults.setFilesWithDuplicateFragments(filesWithDuplicateFragments);
         statisticResults.setNumberOfFilesContainingDuplicateFragments(filesWithDuplicateFragments.size());
 
         final double percentageOfFilesAnalysedThatHaveDuplicateFragments = calculate2DecimalPlacesPercentageOfDuplication(filesWithDuplicateFragments.size(),

@@ -6,7 +6,7 @@ public class StatisticResults {
     private Integer numberOfFilesAnalysed;
     private Integer numberOfDuplicatedCodeFragments;
     private Integer numberOfFilesContainingDuplicateFragments;
-    private Set<String> filesWitDuplicateFragments;
+    private Set<String> filesWithDuplicateFragments;
     private Double percentageOfFilesAnalysedThatHaveDuplicateFragments;
 
     public Integer getNumberOfFilesAnalysed() {
@@ -33,12 +33,12 @@ public class StatisticResults {
         this.numberOfFilesContainingDuplicateFragments = numberOfFilesContainingDuplicateFragments;
     }
 
-    public Set<String> getFilesWitDuplicateFragments() {
-        return filesWitDuplicateFragments;
+    public Set<String> getFilesWithDuplicateFragments() {
+        return filesWithDuplicateFragments;
     }
 
-    public void setFilesWitDuplicateFragments(final Set<String> filesWitDuplicateFragments) {
-        this.filesWitDuplicateFragments = filesWitDuplicateFragments;
+    public void setFilesWithDuplicateFragments(final Set<String> filesWithDuplicateFragments) {
+        this.filesWithDuplicateFragments = filesWithDuplicateFragments;
     }
 
     public Double getPercentageOfFilesAnalysedThatHaveDuplicateFragments() {

@@ -4,10 +4,10 @@ rm -f DuDe-analysis.sh
 rm -f dude-*
 
 # Download DuDe jar file from DuDe's GitHub release
-wget --no-check-certificate --content-disposition https://github.com/LaviniaCioloca/DuDe/releases/download/v1.0/DuDe.jar
+wget --no-check-certificate --content-disposition https://github.com/LaviniaCioloca/DuDe/releases/download/v2.0/DuDe.jar
 
 # Download DuDe analysis script that will be executed next as this script ends
-wget --no-check-certificate --content-disposition https://github.com/LaviniaCioloca/DuDe/releases/download/v1.0/DuDe-analysis.sh
+wget --no-check-certificate --content-disposition https://github.com/LaviniaCioloca/DuDe/releases/download/v2.0/DuDe-analysis.sh
 
 # Create the configuration file from the environment variables set in build's shell
 cat <<EOF > dude-config.txt

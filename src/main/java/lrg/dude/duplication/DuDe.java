@@ -91,10 +91,9 @@ public class DuDe {
             fileExtensions.add(".sql");
         }
 
-        System.out.println("Will perform DuDe search analysis in folder: " + projectFolder);
-        System.out.println("File to be analysed will have the extensions: " + String.join(", ", fileExtensions));
-        System.out.println("The minimum duplication length is considered to be: " + minDuplicationLength + " LOC " +
-                           "(lines of code)");
+        // System.out.println("Will perform DuDe search analysis in folder: " + projectFolder);
+        System.out.println("File extensions considered for analysis: " + String.join(", ", fileExtensions));
+        System.out.println("The minimum duplication length is: " + minDuplicationLength + " LOC (lines of code)");
     }
 
     public static void main(String[] args) throws IOException {
@@ -104,7 +103,7 @@ public class DuDe {
             init(args[0]);
         }
 
-        System.out.println("\n--- DuDe Analysis started ---\n");
+        // System.out.println("\n--- DuDe Analysis started ---\n");
         Processor processor = new SuffixTreeProcessor(projectFolder, new IdenticalCompareStrategy());
 
         Parameters params = new Parameters(minDuplicationLength, maxLineBias, minExactChunk, considerComments, considerTestFiles);

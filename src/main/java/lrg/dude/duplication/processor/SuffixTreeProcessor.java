@@ -58,7 +58,7 @@ public class SuffixTreeProcessor extends Processor {
         DirectoryReader cititorDirector = new DirectoryReader(path);
         ArrayList<File> files = cititorDirector.getFilesRecursive();
 
-        System.out.println("Total number of files in folder: " + files.size());
+        System.out.println("Total number of files in search folder: " + files.size());
         // System.out.println(files);
         // System.out.println("\n\n");
         if (files != null) {
@@ -90,7 +90,7 @@ public class SuffixTreeProcessor extends Processor {
             entitiesWithoutCleanup[i] = entity;
         }
         long stop = System.currentTimeMillis();
-        System.out.print("Got " + entities.length + " source files in: ");
+        System.out.print("Number of files with matching extension: " + entities.length + " extracted in: ");
         System.out.println(TimeMeasurer.convertTimeToString(stop - start));
     }
 
@@ -148,7 +148,7 @@ public class SuffixTreeProcessor extends Processor {
         numberOfDuplicatedLines = matrixLines.countDuplicatedLines();
         notifyObservers();
         long currentTimeMillis = System.currentTimeMillis();
-        System.out.println("Computed duplications in: " + (currentTimeMillis - startTime) + " ms");
+        System.out.println("DuDe duplication analysis completed in: " + (currentTimeMillis - startTime) + " ms");
         time = ((double) (currentTimeMillis - startTime)) / 1000.0;
     }
 
@@ -185,7 +185,7 @@ public class SuffixTreeProcessor extends Processor {
      * @return array of "clean" code
      */
     public MatrixLineList createNewMatrixLines() {
-        System.out.println("Cleaning the noise out of the source files\n");
+        // System.out.println("Cleaning the noise out of the source files\n");
         long start = System.currentTimeMillis();
         matrixLines = new MatrixLineList();
         int noOfMatrixLinesBefore, noOfMatrixLinesAfter;
@@ -207,7 +207,7 @@ public class SuffixTreeProcessor extends Processor {
             setRelevantLinesForReferenceEntity(entities[i]);
         }
         long stop = System.currentTimeMillis();
-        System.out.print("\nGot " + matrixLines.size() + " lines of clean code in: ");
+        System.out.print("\nNumber of LOC (lines of code) for analysis: " + matrixLines.size() + " extracted in: ");
         System.out.println(TimeMeasurer.convertTimeToString(stop - start) + "\n");
         return matrixLines;
     }

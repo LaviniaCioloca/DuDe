@@ -6,7 +6,14 @@ currentPercentage=$(grep -o '<td>.*%</td>' dude-statistics.html | awk -F'[>|%]' 
 
 previousPercentage=$(grep -o '<td>.*%</td>' dude-statistics.html | awk -F'[>|%]' '{print $2}' | tail -1)
 
-percentageChange=$(echo "$currentPercentage" - "$previousPercentage" | bc -l)
+# If there is a N/A value for the previous duplication percentage, do not consider any percentage change
+if [ "$previousPercentage" = "N/A" ];
+then
+  percentageChange=0
+else
+  percentageChange=$(echo "$currentPercentage" - "$previousPercentage" | bc -l)
+fi
+
 
 # Determine the duplication impact and the result of the build
 printf "\n--- DuDeJenkinsPlugin result ---\n"

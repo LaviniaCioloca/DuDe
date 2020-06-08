@@ -16,7 +16,11 @@ public class StringList implements Serializable {
     }
 
     public StringList() {
-        list = new ArrayList<String>();
+        list = new ArrayList<>();
+    }
+
+    public StringList(final ArrayList<String> list) {
+        this.list = list;
     }
 
     public void add(String s) {

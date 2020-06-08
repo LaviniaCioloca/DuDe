@@ -20,6 +20,7 @@ import lrg.dude.duplication.strategies.StringCompareStrategy;
 import lrg.dude.duplication.utils.CleaningDecorator;
 import lrg.dude.duplication.utils.CommentsCleaner;
 import lrg.dude.duplication.utils.DirectoryReader;
+import lrg.dude.duplication.utils.ImportsCleaner;
 import lrg.dude.duplication.utils.NoiseCleaner;
 import lrg.dude.duplication.utils.TimeMeasurer;
 import lrg.dude.duplication.utils.WhiteSpacesCleaner;
@@ -541,7 +542,7 @@ public class Processor extends Thread implements Subject {
      * @return clean code
      */
     private StringList cleanCode(StringList bruteText) {
-        CleaningDecorator commonCleaner = new WhiteSpacesCleaner(new NoiseCleaner(null));
+        CleaningDecorator commonCleaner = new WhiteSpacesCleaner(new ImportsCleaner(new NoiseCleaner(null)));
         CleaningDecorator cleaner;
         if (!params.isConsiderComments()) {
             cleaner = new CommentsCleaner(commonCleaner);

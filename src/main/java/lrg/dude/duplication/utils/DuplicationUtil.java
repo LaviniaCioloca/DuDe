@@ -5,7 +5,7 @@ import lrg.dude.duplication.model.StringList;
 public class DuplicationUtil {
 
     public static StringList cleanCode(StringList bruteText, boolean considerComments) {
-        CleaningDecorator commonCleaner = new WhiteSpacesCleaner(new NoiseCleaner(null));
+        CleaningDecorator commonCleaner = new WhiteSpacesCleaner(new ImportsCleaner(new NoiseCleaner(null)));
         CleaningDecorator cleaner;
         if (!considerComments) {
             cleaner = new CommentsCleaner(commonCleaner);

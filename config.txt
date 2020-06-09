@@ -1,7 +1,7 @@
 project.folder=.
-min.chunk=10
-max.linebias=30
-min.length=10
+min.chunk=5
+max.linebias=3
+min.length=13
 file.extensions=java,sql
 consider.comments=false
 consider.test.files=false

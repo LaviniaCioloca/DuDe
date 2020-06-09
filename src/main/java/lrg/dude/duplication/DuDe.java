@@ -7,6 +7,7 @@ import lrg.dude.duplication.processor.Processor;
 import lrg.dude.duplication.processor.SuffixTreeProcessor;
 import lrg.dude.duplication.results.model.ChronosImportJson;
 import lrg.dude.duplication.results.model.DuplicationFragment;
+import lrg.dude.duplication.results.model.FilesWithDuplication;
 import lrg.dude.duplication.results.model.StatisticResults;
 import lrg.dude.duplication.strategies.IdenticalCompareStrategy;
 
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class DuDe {
     public static final String PROJECT_FOLDER = "project.folder=";
@@ -32,7 +34,7 @@ public class DuDe {
     public static final String FILE_EXTENSIONS = "file.extensions=";
     public static final String CONSIDER_COMMENTS = "consider.comments=";
     public static final String CONSIDER_TEST_FILES = "consider.test.files=";
-    private static final Map<String, List<String>> duplicationFragmentsInFiles = new HashMap<>();
+    private static final Map<DuplicationFragment, List<String>> duplicationFragmentsInFiles = new HashMap<>();
     public static String projectFolder = null;
     public static int minDuplicationLength = 20;
     public static int minExactChunk = 5;
@@ -118,7 +120,7 @@ public class DuDe {
             System.exit(0);
         }
 
-        ArrayList<ChronosImportJson> jsonObjects = new ArrayList<ChronosImportJson>();
+        ArrayList<ChronosImportJson> jsonObjects = new ArrayList<>();
 
         for (int index = 0; index < results.length; index++) {
             String referenceFile = results[index].getReferenceCode().getEntityName();
@@ -126,7 +128,7 @@ public class DuDe {
 
             List<Duplication> duplicationForReferenceFile = resultsMap.get(referenceFile);
             if (duplicationForReferenceFile == null) {
-                duplicationForReferenceFile = new ArrayList<Duplication>();
+                duplicationForReferenceFile = new ArrayList<>();
             }
             duplicationForReferenceFile.add(results[index]);
             resultsMap.put(referenceFile, duplicationForReferenceFile);
@@ -147,12 +149,16 @@ public class DuDe {
             jsonObjects.addAll(exportDuplication(filename, resultsMap.get(filename)));
         }
 
-        final List<DuplicationFragment> duplicationFragments = new ArrayList<>();
+        final List<FilesWithDuplication> duplicationFragments = new ArrayList<>();
         duplicationFragmentsInFiles.entrySet().forEach(entry -> {
-            final DuplicationFragment duplicationFragment = new DuplicationFragment(entry.getKey(),
-                                                                                    entry.getValue().size(),
-                                                                                    entry.getValue());
-            duplicationFragments.add(duplicationFragment);
+            final FilesWithDuplication filesWithDuplication = new FilesWithDuplication();
+            filesWithDuplication.setDuplicationFragment(entry.getKey().getDuplicationFragment());
+            filesWithDuplication.setDuplicationTotalLOC(entry.getKey().getDuplicationTotalLOC());
+            filesWithDuplication.setDuplicationActualLOC(entry.getKey().getDuplicationActualLOC());
+            filesWithDuplication.setDuplicationCount(entry.getValue().size());
+            filesWithDuplication.setFilesWithDuplicationFragmentPresent(entry.getValue());
+
+            duplicationFragments.add(filesWithDuplication);
         });
 
         PrintWriter out = new PrintWriter("dude-duplicationFragments.json");
@@ -171,7 +177,7 @@ public class DuDe {
         List<ChronosImportJson> result = new ArrayList<>();
 
         final List<String> duplicatedFileNames = new ArrayList<>();
-        final List<String> duplicatedCodeFragments = new ArrayList<>();
+        final List<DuplicationFragment> duplicatedCodeFragments = new ArrayList<>();
 
         if (filename.contains("CurrencyCloud.")) {
             System.out.println(filename);
@@ -182,14 +188,25 @@ public class DuDe {
             if (filename.compareTo(crtDup.getReferenceCode().getEntityName()) == 0) {
                 duplicatedFileNames.add(crtDup.getDuplicateCode().getEntityName());
                 duplicatedFiles.add(crtDup.getDuplicateCode().getEntityName());
-                duplicatedCodeFragments.add(crtDup.getDuplicateCode().toString());
+
+                final DuplicationFragment duplicationFragment =
+                        new DuplicationFragment(crtDup.getDuplicateCode().toString(),
+                                                crtDup.getDuplicateCode().getLinesOfCode().size(),
+                                                crtDup.getDuplicateCode().getLinesOfCleanedCode().size());
+                duplicatedCodeFragments.add(duplicationFragment);
+
                 if (filename.contains("CurrencyCloud.")) {
                     System.out.println("\t >>>" + crtDup.getDuplicateCode().getEntityName());
                 }
             } else {
                 duplicatedFiles.add(crtDup.getReferenceCode().getEntityName());
                 duplicatedFileNames.add(crtDup.getReferenceCode().getEntityName());
-                duplicatedCodeFragments.add(crtDup.getReferenceCode().toString());
+
+                final DuplicationFragment duplicationFragment =
+                        new DuplicationFragment(crtDup.getReferenceCode().toString(),
+                                                crtDup.getReferenceCode().getLinesOfCode().size(),
+                                                crtDup.getReferenceCode().getLinesOfCleanedCode().size());
+                duplicatedCodeFragments.add(duplicationFragment);
             }
         }
 
@@ -206,7 +223,8 @@ public class DuDe {
             }
         }
 
-        result.add(new ChronosImportJson(filename, "duplicated_lines", "duplication", duplication_lines, duplicatedCodeFragments));
+        result.add(new ChronosImportJson(filename, "duplicated_lines", "duplication", duplication_lines,
+                                         duplicatedCodeFragments.stream().map(DuplicationFragment::getDuplicationFragment).collect(Collectors.toList())));
         result.add(new ChronosImportJson(filename, "duplicated_files", "duplication", duplicatedFiles.size(), duplicatedFileNames));
 
         return result;

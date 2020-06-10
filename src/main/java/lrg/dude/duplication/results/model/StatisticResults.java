@@ -8,6 +8,8 @@ public class StatisticResults {
     private Integer numberOfFilesContainingDuplicateFragments;
     private Set<String> filesWithDuplicateFragments;
     private Double percentageOfFilesAnalysedThatHaveDuplicateFragments;
+    private DuplicationFragmentJSONExportModel duplicationFragmentWithMostLOC;
+    private DuplicationFragmentJSONExportModel duplicationFragmentPresentInMostFiles;
 
     public Integer getNumberOfFilesAnalysed() {
         return numberOfFilesAnalysed;
@@ -47,5 +49,21 @@ public class StatisticResults {
 
     public void setPercentageOfFilesAnalysedThatHaveDuplicateFragments(final Double percentageOfFilesAnalysedThatHaveDuplicateFragments) {
         this.percentageOfFilesAnalysedThatHaveDuplicateFragments = percentageOfFilesAnalysedThatHaveDuplicateFragments;
+    }
+
+    public DuplicationFragmentJSONExportModel getDuplicationFragmentWithMostLOC() {
+        return duplicationFragmentWithMostLOC;
+    }
+
+    public void setDuplicationFragmentWithMostLOC(final DuplicationFragmentJSONExportModel duplicationFragmentWithMostLOC) {
+        this.duplicationFragmentWithMostLOC = duplicationFragmentWithMostLOC;
+    }
+
+    public DuplicationFragmentJSONExportModel getDuplicationFragmentPresentInMostFiles() {
+        return duplicationFragmentPresentInMostFiles;
+    }
+
+    public void setDuplicationFragmentPresentInMostFiles(final DuplicationFragmentJSONExportModel duplicationFragmentPresentInMostFiles) {
+        this.duplicationFragmentPresentInMostFiles = duplicationFragmentPresentInMostFiles;
     }
 }

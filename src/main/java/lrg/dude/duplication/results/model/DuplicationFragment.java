@@ -1,5 +1,7 @@
 package lrg.dude.duplication.results.model;
 
+import java.util.Objects;
+
 public class DuplicationFragment {
     private String duplicationFragment;
     private Integer duplicationTotalLOC;
@@ -33,5 +35,31 @@ public class DuplicationFragment {
 
     public void setDuplicationActualLOC(final Integer duplicationActualLOC) {
         this.duplicationActualLOC = duplicationActualLOC;
+    }
+
+    @Override
+    public String toString() {
+        return "DuplicationFragment{" +
+               "duplicationFragment='" + duplicationFragment + '\'' +
+               ", duplicationTotalLOC=" + duplicationTotalLOC +
+               ", duplicationActualLOC=" + duplicationActualLOC +
+               '}';
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final DuplicationFragment that = (DuplicationFragment) o;
+        return duplicationFragment.equals(that.duplicationFragment);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(duplicationFragment);
     }
 }

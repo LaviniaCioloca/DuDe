@@ -1,13 +1,13 @@
 package lrg.dude.duplication.results.model;
 
-import java.util.List;
+import java.util.Set;
 
-public class FilesWithDuplication {
+public class DuplicationFragmentJSONExportModel {
     private String duplicationFragment;
     private Integer duplicationTotalLOC;
     private Integer duplicationActualLOC;
-    private Integer duplicationCount;
-    private List<String> filesWithDuplicationFragmentPresent;
+    private Integer filesHavingThisDuplicationFragmentCount;
+    private Set<String> filesHavingThisDuplicationFragment;
 
     public String getDuplicationFragment() {
         return duplicationFragment;
@@ -33,19 +33,19 @@ public class FilesWithDuplication {
         this.duplicationActualLOC = duplicationActualLOC;
     }
 
-    public Integer getDuplicationCount() {
-        return duplicationCount;
+    public Integer getFilesHavingThisDuplicationFragmentCount() {
+        return filesHavingThisDuplicationFragmentCount;
     }
 
-    public void setDuplicationCount(final Integer duplicationCount) {
-        this.duplicationCount = duplicationCount;
+    public void setFilesHavingThisDuplicationFragmentCount(final Integer filesHavingThisDuplicationFragmentCount) {
+        this.filesHavingThisDuplicationFragmentCount = filesHavingThisDuplicationFragmentCount;
     }
 
-    public List<String> getFilesWithDuplicationFragmentPresent() {
-        return filesWithDuplicationFragmentPresent;
+    public Set<String> getFilesHavingThisDuplicationFragment() {
+        return filesHavingThisDuplicationFragment;
     }
 
-    public void setFilesWithDuplicationFragmentPresent(final List<String> filesWithDuplicationFragmentPresent) {
-        this.filesWithDuplicationFragmentPresent = filesWithDuplicationFragmentPresent;
+    public void setFilesHavingThisDuplicationFragment(final Set<String> filesHavingThisDuplicationFragment) {
+        this.filesHavingThisDuplicationFragment = filesHavingThisDuplicationFragment;
     }
 }

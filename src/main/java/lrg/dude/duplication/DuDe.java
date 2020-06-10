@@ -7,7 +7,7 @@ import lrg.dude.duplication.processor.Processor;
 import lrg.dude.duplication.processor.SuffixTreeProcessor;
 import lrg.dude.duplication.results.model.ChronosImportJson;
 import lrg.dude.duplication.results.model.DuplicationFragment;
-import lrg.dude.duplication.results.model.FilesWithDuplication;
+import lrg.dude.duplication.results.model.DuplicationFragmentJSONExportModel;
 import lrg.dude.duplication.results.model.StatisticResults;
 import lrg.dude.duplication.strategies.IdenticalCompareStrategy;
 
@@ -18,6 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -34,7 +35,6 @@ public class DuDe {
     public static final String FILE_EXTENSIONS = "file.extensions=";
     public static final String CONSIDER_COMMENTS = "consider.comments=";
     public static final String CONSIDER_TEST_FILES = "consider.test.files=";
-    private static final Map<DuplicationFragment, List<String>> duplicationFragmentsInFiles = new HashMap<>();
     public static String projectFolder = null;
     public static int minDuplicationLength = 20;
     public static int minExactChunk = 5;
@@ -43,6 +43,12 @@ public class DuDe {
     public static HashMap<String, List<Duplication>> resultsMap = new HashMap<>();
     public static boolean considerComments = true;
     public static boolean considerTestFiles = true;
+
+    private static final Map<DuplicationFragment, Set<String>> duplicationFragmentsInFiles = new HashMap<>();
+    private static DuplicationFragmentJSONExportModel duplicationFragmentWithMostLOC =
+            new DuplicationFragmentJSONExportModel();
+    private static DuplicationFragmentJSONExportModel duplicationFragmentPresentInMostFiles =
+            new DuplicationFragmentJSONExportModel();
 
     private static ArrayList<String> initFileExtensions(String listOfFileExtensions) {
         return new ArrayList<>(Arrays.asList(Pattern.compile(",").split(listOfFileExtensions, 0)));
@@ -149,17 +155,33 @@ public class DuDe {
             jsonObjects.addAll(exportDuplication(filename, resultsMap.get(filename)));
         }
 
-        final List<FilesWithDuplication> duplicationFragments = new ArrayList<>();
+        final List<DuplicationFragmentJSONExportModel> duplicationFragments = new ArrayList<>();
         duplicationFragmentsInFiles.entrySet().forEach(entry -> {
-            final FilesWithDuplication filesWithDuplication = new FilesWithDuplication();
+            final DuplicationFragmentJSONExportModel filesWithDuplication = new DuplicationFragmentJSONExportModel();
             filesWithDuplication.setDuplicationFragment(entry.getKey().getDuplicationFragment());
             filesWithDuplication.setDuplicationTotalLOC(entry.getKey().getDuplicationTotalLOC());
             filesWithDuplication.setDuplicationActualLOC(entry.getKey().getDuplicationActualLOC());
-            filesWithDuplication.setDuplicationCount(entry.getValue().size());
-            filesWithDuplication.setFilesWithDuplicationFragmentPresent(entry.getValue());
+            filesWithDuplication.setFilesHavingThisDuplicationFragmentCount(entry.getValue().size());
+            filesWithDuplication.setFilesHavingThisDuplicationFragment(entry.getValue());
 
             duplicationFragments.add(filesWithDuplication);
         });
+
+        final DuplicationFragment duplicationWithMostLOC = duplicationFragmentsInFiles.keySet()
+                                                                                      .stream()
+                                                                                      .max(Comparator.comparing(DuplicationFragment::getDuplicationActualLOC))
+                                                                                      .get();
+
+        final DuplicationFragment duplicationPresentInMostFiles = duplicationFragmentsInFiles.entrySet()
+                                                                                             .stream()
+                                                                                             .max(Map.Entry.comparingByValue(Comparator.comparingInt(Set::size)))
+                                                                                             .get()
+                                                                                             .getKey();
+
+        populateDuplicationFragmentsForJSONExport(duplicationWithMostLOC,
+                                                  duplicationFragmentsInFiles.get(duplicationWithMostLOC),
+                                                  duplicationPresentInMostFiles,
+                                                  duplicationFragmentsInFiles.get(duplicationPresentInMostFiles));
 
         PrintWriter out = new PrintWriter("dude-duplicationFragments.json");
         out.println(new Gson().toJson(duplicationFragments));
@@ -168,6 +190,23 @@ public class DuDe {
         exportJson(jsonObjects);
 
         exportStatisticResults(processor);
+    }
+
+    private static void populateDuplicationFragmentsForJSONExport(final DuplicationFragment duplicationWithMostLOC,
+                                                                  final Set<String> filesThatHaveTheDuplicationWithMostLOC,
+                                                                  final DuplicationFragment duplicationPresentInMostFiles,
+                                                                  final Set<String> filesThatHaveTheDuplicationPresentInMostFiles) {
+        duplicationFragmentWithMostLOC.setDuplicationFragment(duplicationWithMostLOC.getDuplicationFragment());
+        duplicationFragmentWithMostLOC.setDuplicationTotalLOC(duplicationWithMostLOC.getDuplicationTotalLOC());
+        duplicationFragmentWithMostLOC.setDuplicationActualLOC(duplicationWithMostLOC.getDuplicationActualLOC());
+        duplicationFragmentWithMostLOC.setFilesHavingThisDuplicationFragmentCount(filesThatHaveTheDuplicationWithMostLOC.size());
+        duplicationFragmentWithMostLOC.setFilesHavingThisDuplicationFragment(filesThatHaveTheDuplicationWithMostLOC);
+
+        duplicationFragmentPresentInMostFiles.setDuplicationFragment(duplicationPresentInMostFiles.getDuplicationFragment());
+        duplicationFragmentPresentInMostFiles.setDuplicationTotalLOC(duplicationPresentInMostFiles.getDuplicationTotalLOC());
+        duplicationFragmentPresentInMostFiles.setDuplicationActualLOC(duplicationPresentInMostFiles.getDuplicationActualLOC());
+        duplicationFragmentPresentInMostFiles.setFilesHavingThisDuplicationFragmentCount(filesThatHaveTheDuplicationPresentInMostFiles.size());
+        duplicationFragmentPresentInMostFiles.setFilesHavingThisDuplicationFragment(filesThatHaveTheDuplicationPresentInMostFiles);
     }
 
     private static List<ChronosImportJson> exportDuplication(String filename, List<Duplication> duplicationsForFile) {
@@ -212,13 +251,14 @@ public class DuDe {
 
         for (int i = 0; i < duplicatedCodeFragments.size(); ++i) {
             if (duplicationFragmentsInFiles.get(duplicatedCodeFragments.get(i)) == null) {
-                final List<String> fileThatHasDuplicationFragment = new ArrayList<>();
+                final Set<String> fileThatHasDuplicationFragment = new HashSet<>();
                 fileThatHasDuplicationFragment.add(filename);
                 fileThatHasDuplicationFragment.add(duplicatedFileNames.get(i));
 
                 duplicationFragmentsInFiles.put(duplicatedCodeFragments.get(i), fileThatHasDuplicationFragment);
             } else {
-                final List<String> fileThatHasDuplicationFragment = duplicationFragmentsInFiles.get(duplicatedCodeFragments.get(i));
+                final Set<String> fileThatHasDuplicationFragment =
+                        duplicationFragmentsInFiles.get(duplicatedCodeFragments.get(i));
                 fileThatHasDuplicationFragment.add(duplicatedFileNames.get(i));
             }
         }
@@ -266,7 +306,10 @@ public class DuDe {
                                                                                                                           processor.getNumberOfEntities());
         statisticResults.setPercentageOfFilesAnalysedThatHaveDuplicateFragments(percentageOfFilesAnalysedThatHaveDuplicateFragments);
 
-        PrintWriter out = new PrintWriter("dude-StatisticResults.json");
+        statisticResults.setDuplicationFragmentWithMostLOC(duplicationFragmentWithMostLOC);
+        statisticResults.setDuplicationFragmentPresentInMostFiles(duplicationFragmentPresentInMostFiles);
+
+        final PrintWriter out = new PrintWriter("dude-StatisticResults.json");
         out.println(new Gson().toJson(statisticResults));
         out.close();
     }

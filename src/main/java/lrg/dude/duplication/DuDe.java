@@ -1,6 +1,7 @@
 package lrg.dude.duplication;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import lrg.dude.duplication.model.Duplication;
 import lrg.dude.duplication.model.Parameters;
 import lrg.dude.duplication.processor.Processor;
@@ -183,8 +184,9 @@ public class DuDe {
                                                   duplicationPresentInMostFiles,
                                                   duplicationFragmentsInFiles.get(duplicationPresentInMostFiles));
 
-        PrintWriter out = new PrintWriter("dude-duplicationFragments.json");
-        out.println(new Gson().toJson(duplicationFragments));
+        final PrintWriter out = new PrintWriter("dude-duplicationFragments.json");
+        final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        out.println(gson.toJson(duplicationFragments));
         out.close();
 
         exportJson(jsonObjects);
@@ -272,7 +274,8 @@ public class DuDe {
 
     public static void exportJson(List<ChronosImportJson> jsonObjects) throws IOException {
         PrintWriter out = new PrintWriter("dude.json");
-        out.println(new Gson().toJson(jsonObjects));
+        final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        out.println(gson.toJson(jsonObjects));
         out.close();
 
         out = new PrintWriter("dude.csv");
@@ -310,7 +313,8 @@ public class DuDe {
         statisticResults.setDuplicationFragmentPresentInMostFiles(duplicationFragmentPresentInMostFiles);
 
         final PrintWriter out = new PrintWriter("dude-StatisticResults.json");
-        out.println(new Gson().toJson(statisticResults));
+        final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        out.println(gson.toJson(statisticResults));
         out.close();
     }
 
